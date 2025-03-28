@@ -32,8 +32,15 @@ const stylesParticipants = StyleSheet.create({
         marginHorizontal: 80,
     },
     participantContainer: {
-        height: "81%",
-    }
+        justifyContent: "space-between",
+        alignItems: "center",
+        backgroundColor: "#f0f0f0",
+        padding: 20,
+        borderWidth: 1,
+        borderColor: "#d3d3d3",
+        borderRadius: 10,
+        height: "80%",
+    },
 })
 
 export default stylesParticipants;

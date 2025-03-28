@@ -1,10 +1,22 @@
 import React from 'react';
-import {Text, View, Image} from "react-native";
+import {Text, View, Image, FlatList} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
-import {ParticipantContainer} from "../../components/ParticipantContainer";
+import {ParticipantItem} from "../../components/partipants/ParticipantItem";
+
 
 const Participants = () => {
+
+    const ListParticipants = [
+        "Antonio",
+        "Sihao",
+        "Emily",
+        "Enrique",
+        "Axel",
+        "Alex",
+        "Daniel",
+    ]
+
     return(
         <View style={stylesParticipants.container}>
         <View style={stylesParticipants.topSection}>
@@ -16,7 +28,13 @@ const Participants = () => {
             <View>
                 <Filtro/>
                 <View style={stylesParticipants.participantContainer}>
-                <ParticipantContainer/>
+                    <FlatList
+                        data={ListParticipants}
+                        keyExtractor={(item, index) => index.toString()}
+                        showsVerticalScrollIndicator={false}
+                        renderItem={({item})=>
+                        <ParticipantItem username={item}></ParticipantItem>
+                    }/>
             </View>
             </View>
         </View>

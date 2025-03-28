@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        width: "80%",
+        width: "100%",
+        height: 90,
         alignSelf: "center",
         marginBottom: 26
     },
@@ -72,11 +73,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        width: "45%",
     },
     userImg:{
         width: 70,
         height: 70,
+        marginRight: 10,
     },
     usernameText:{
       fontSize: 24,
