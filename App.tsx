@@ -1,19 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import {NavigationContainer} from "@react-navigation/native";
-import {createStackNavigator} from "@react-navigation/stack";
-import {AsistenciaView} from "./app/presentation/views/attendance/asistencia";
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {NavigationContainer} from "@react-navigation/native";
+import Home from "./app/presentation/views/home/Home";
 
-export type RootStackParamsList = {
-  AsistenciaView: undefined;
 
+const Stack= createNativeStackNavigator<RootStackParamlist>();
+
+export type RootStackParamlist = {
+  Home: undefined,
 }
-const Stack = createStackNavigator<RootStackParamsList>();
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="AsistenciaView" component={AsistenciaView}/>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name={"Home"} component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
