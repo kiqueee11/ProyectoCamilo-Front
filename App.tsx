@@ -3,18 +3,21 @@ import { StyleSheet, Text, View } from 'react-native';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {NavigationContainer} from "@react-navigation/native";
 import Home from "./app/presentation/views/home/Home";
+import {LoginScreen} from "./app/presentation/views/auth/Login";
 
 
 const Stack= createNativeStackNavigator<RootStackParamlist>();
 
 export type RootStackParamlist = {
   Home: undefined,
+  LoginScreen: undefined,
 }
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
         <Stack.Screen name={"Home"} component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
