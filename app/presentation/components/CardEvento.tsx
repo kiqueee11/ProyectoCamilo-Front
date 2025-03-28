@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.backgroundColor,
         paddingVertical: 15,
         paddingHorizontal: 15,
+        elevation: 3,
     },
     containerInfo: {
         flexDirection: 'row',
@@ -48,7 +49,8 @@ const styles = StyleSheet.create({
         fontWeight: 'light',
     },
     containerUser:{
-        margin: 5,
+        marginTop: 13,
+        marginHorizontal: 5,
         flexDirection: 'row',
         alignItems: 'center'
     },
