@@ -4,9 +4,6 @@ import stylesHome from './StylesHome';
 import {Filtro} from "../../components/Filtro";
 import CardEvento from "../../components/CardEvento";
 import ButtonAddEvento from "../../components/ButtonAddEvento";
-import {useNavigation} from "@react-navigation/native";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {RootStackParamlist} from "../../../../App";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 
 const Home = ({navigation}:PropsStackNavigation) => {
@@ -30,7 +27,9 @@ const Home = ({navigation}:PropsStackNavigation) => {
                     />
                 </TouchableOpacity>
             </View>
-            <ButtonAddEvento/>
+            <ButtonAddEvento onPress={() => {
+
+            }}/>
         </View>
     )
 }

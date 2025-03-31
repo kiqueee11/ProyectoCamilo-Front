@@ -20,7 +20,7 @@ const DetailEvent = ({navigation}: PropsStackNavigation) => {
             <View style={styles.containerDetailEvent}>
                 <View style={styles.containerTop}>
                     <UserInfo username={"Usuario"} imageUser={require('../../../../assets/user.png')}/>
-                    <ActionButtons/>
+                    <ActionButtons onPressBorrar={() => {}} onPressEditar={() => {}}/>
                 </View>
                 <View>
                     <Text style={styles.textTitulo}>Titulo del evento</Text>
