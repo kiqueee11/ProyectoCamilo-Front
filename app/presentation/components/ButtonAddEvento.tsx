@@ -4,10 +4,7 @@ import {AppColors} from "../theme/AppTheme";
 
 const ButtonAddEvento = () => {
     return(
-        <TouchableOpacity
-            onPress={() => {}}
-            style={styles.button}
-        >
+        <TouchableOpacity onPress={() => {}} style={styles.button}>
             <Text style={styles.add}>+</Text>
         </TouchableOpacity>
     )
