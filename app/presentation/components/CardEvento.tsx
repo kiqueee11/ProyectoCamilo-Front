@@ -2,23 +2,32 @@ import React from "react";
 import {View, Text, StyleSheet, Image} from "react-native";
 import {AppColors} from "../theme/AppTheme";
 
-const CardEvento = () => {
+interface Props{
+    titulo: string,
+    fecha: string,
+    tipoEvento: string,
+    ubicacion: string,
+    userImage: any,
+    usuario: string
+}
+
+const CardEvento = ({titulo, fecha, tipoEvento, ubicacion, userImage, usuario}: Props) => {
     return(
         <View style={styles.containerCardEvento}>
             <View style={styles.containerInfo}>
-                <Text style={styles.tituloEvento}>Review title</Text>
-                <Text style={styles.textInfo}>27/03/2025</Text>
+                <Text style={styles.tituloEvento}>{titulo}</Text>
+                <Text style={styles.textInfo}>{fecha}</Text>
             </View>
             <View style={styles.containerInfo}>
-                <Text style={styles.textInfo}>Deportivo</Text>
-                <Text style={styles.textInfo}>Madrid, España</Text>
+                <Text style={styles.textInfo}>{tipoEvento}</Text>
+                <Text style={styles.textInfo}>{ubicacion}</Text>
             </View>
             <View style={styles.containerUser}>
                 <Image
-                    source={require('../../../assets/user.png')}
+                    source={userImage}
                     style={styles.userImage}
                 />
-                <Text style={styles.nombreUser}>Usuario</Text>
+                <Text style={styles.nombreUser}>{usuario}</Text>
             </View>
         </View>
     )

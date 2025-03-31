@@ -20,7 +20,14 @@ const Home = ({navigation}:PropsStackNavigation) => {
                 <TouchableOpacity onPress={() => {
                     navigation.navigate("DetailEvent")
                 }}>
-                    <CardEvento />
+                    <CardEvento
+                        titulo={"Review title"}
+                        fecha={"28/03/2025"}
+                        tipoEvento={"Evento"}
+                        ubicacion={"Madrid, España"}
+                        userImage={require("../../../../assets/user.png")}
+                        usuario={"Usuario"}
+                    />
                 </TouchableOpacity>
             </View>
             <ButtonAddEvento/>
