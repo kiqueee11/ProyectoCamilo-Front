@@ -8,10 +8,11 @@ interface Props {
     secureTextEntry: boolean;
     text: string;
     image: any;
+    editable: boolean;
    // onPressFormInterface: (text: string) => void;
 }
 
-const FormInput = ({image,text, placeholder, keyboardType, secureTextEntry}: Props) => {
+const FormInput = ({image,text, placeholder, keyboardType, secureTextEntry, editable}: Props) => {
 
     return (
         <View style={styles.formInputContainer}>
@@ -21,6 +22,7 @@ const FormInput = ({image,text, placeholder, keyboardType, secureTextEntry}: Pro
                        placeholder={placeholder}
                        secureTextEntry={secureTextEntry}
                        keyboardType={keyboardType}
+                       editable={editable}
             ></TextInput>
             <Image style={styles.formImageInput} source={image}/>
         </View>

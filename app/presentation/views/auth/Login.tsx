@@ -28,6 +28,7 @@ return (
                 placeholder={""}
                 keyboardType="email-address"
                 secureTextEntry={false}
+                editable={true}
                 //onPressFormInterface={(text) => onChangeLogin('email', text)}
             ></FormInput>
             <FormInput
@@ -36,11 +37,12 @@ return (
                 placeholder={""}
                 keyboardType="default"
                 secureTextEntry={true}
+                editable={true}
                 //onPressFormInterface={(text) => onChangeLogin('password', text)}
             ></FormInput>
             <View style={styles.buttonContainer}>
                 <RoundedButton text={"Entrar"} onPressFromInterface={() => {
-                    navigation.replace("CreateEvent")
+                    navigation.replace("Home")
                     //login()
                 }}></RoundedButton>
             </View>
