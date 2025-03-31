@@ -6,7 +6,7 @@ import {AdminParticipantItem} from "../../components/partipants/AdminParticipant
 import {ParticipantItem} from "../../components/partipants/ParticipantItem";
 
 
-const Participants = () => {
+const AdminParticipants = () => {
 
     const ListParticipants = [
         "Antonio",
@@ -34,7 +34,7 @@ const Participants = () => {
                         keyExtractor={(item, index) => index.toString()}
                         showsVerticalScrollIndicator={false}
                         renderItem={({item})=>
-                        <ParticipantItem username={item}></ParticipantItem>
+                        <AdminParticipantItem username={item}></AdminParticipantItem>
                     }/>
             </View>
             </View>
@@ -42,4 +42,4 @@ const Participants = () => {
     )
 }
 
-export default Participants;
+export default AdminParticipants;

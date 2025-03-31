@@ -3,7 +3,7 @@ import { StyleSheet} from 'react-native';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {NavigationContainer} from "@react-navigation/native";
 import Home from "./app/presentation/views/home/Home";
-import Participants from "./app/presentation/views/participants/Participants";
+import AdminParticipants from "./app/presentation/views/participants/AdminParticipants";
 
 
 const Stack= createNativeStackNavigator<RootStackParamlist>();
@@ -17,7 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={"Participants"} component={Participants} />
+        <Stack.Screen name={"Participants"} component={AdminParticipants} />
       </Stack.Navigator>
     </NavigationContainer>
   );
