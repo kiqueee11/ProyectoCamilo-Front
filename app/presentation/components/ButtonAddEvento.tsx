@@ -2,9 +2,13 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {AppColors} from "../theme/AppTheme";
 
-const ButtonAddEvento = () => {
+interface Props {
+    onPress: () => void,
+}
+
+const ButtonAddEvento = ({onPress}:Props) => {
     return(
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
+        <TouchableOpacity onPress={() => onPress()} style={styles.button}>
             <Text style={styles.add}>+</Text>
         </TouchableOpacity>
     )
