@@ -7,7 +7,7 @@ interface Props{
     fecha: string,
     tipoEvento: string,
     ubicacion: string,
-    userImage: string,
+    userImage: any,
     usuario: string
 }
 
