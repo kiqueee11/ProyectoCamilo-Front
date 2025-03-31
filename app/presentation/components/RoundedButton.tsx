@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         backgroundColor: "grey",
         borderRadius: 100,
         width: "100%",
-        height: "35%",
+        height: "30%",
         elevation: 40,
     },
     buttonFormText: {

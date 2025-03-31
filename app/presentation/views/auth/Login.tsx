@@ -23,6 +23,7 @@ return (
         <View style={styles.formContainer}>
 
             <FormInput
+                image={null}
                 text={"Correo eletrónico"}
                 placeholder={""}
                 keyboardType="email-address"
@@ -30,6 +31,7 @@ return (
                 //onPressFormInterface={(text) => onChangeLogin('email', text)}
             ></FormInput>
             <FormInput
+                image={null}
                 text={"Contraseña"}
                 placeholder={""}
                 keyboardType="default"
@@ -38,7 +40,7 @@ return (
             ></FormInput>
             <View style={styles.buttonContainer}>
                 <RoundedButton text={"Entrar"} onPressFromInterface={() => {
-                    navigation.replace("Home")
+                    navigation.replace("CreateEvent")
                     //login()
                 }}></RoundedButton>
             </View>
