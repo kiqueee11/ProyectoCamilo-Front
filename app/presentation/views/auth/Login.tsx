@@ -23,17 +23,21 @@ return (
         <View style={styles.formContainer}>
 
             <FormInput
+                image={null}
                 text={"Correo eletrónico"}
                 placeholder={""}
                 keyboardType="email-address"
                 secureTextEntry={false}
+                editable={true}
                 //onPressFormInterface={(text) => onChangeLogin('email', text)}
             ></FormInput>
             <FormInput
+                image={null}
                 text={"Contraseña"}
                 placeholder={""}
                 keyboardType="default"
                 secureTextEntry={true}
+                editable={true}
                 //onPressFormInterface={(text) => onChangeLogin('password', text)}
             ></FormInput>
             <View style={styles.buttonContainer}>

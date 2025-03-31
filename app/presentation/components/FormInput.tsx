@@ -1,4 +1,4 @@
-import {KeyboardType, TextInput, View, StyleSheet, Text} from "react-native";
+import {Image, KeyboardType, TextInput, View, StyleSheet, Text} from "react-native";
 import React from "react";
 
 
@@ -7,21 +7,24 @@ interface Props {
     keyboardType: KeyboardType;
     secureTextEntry: boolean;
     text: string;
+    image: any;
+    editable: boolean;
    // onPressFormInterface: (text: string) => void;
 }
 
-const FormInput = ({text, placeholder, keyboardType, secureTextEntry}: Props) => {
+const FormInput = ({image,text, placeholder, keyboardType, secureTextEntry, editable}: Props) => {
 
     return (
-        <View>
+        <View style={styles.formInputContainer}>
             <Text style={styles.textInput}>{text}</Text>
+
             <TextInput style={styles.input}
                        placeholder={placeholder}
                        secureTextEntry={secureTextEntry}
                        keyboardType={keyboardType}
-
+                       editable={editable}
             ></TextInput>
-
+            <Image style={styles.formImageInput} source={image}/>
         </View>
 
 
@@ -29,14 +32,30 @@ const FormInput = ({text, placeholder, keyboardType, secureTextEntry}: Props) =>
 }
 
     const styles = StyleSheet.create({
+       formInputContainer:{
+        flexDirection:"column",
+           width:"100%",
+
+
+       },
+
+
         textInput: {
-            width:"95%",
-            display:"flex",
+            width:"100%",
             margin: "auto",
             marginBottom: 7,
-            elevation: 4,
+        },
+        formImageInput: {
+            width: 25,
+            height: 25,
+            position: "absolute",
+            alignSelf: "flex-end",
+            top:"45%",
+            right:"5%",
+
         },
         input: {
+            width: "100%",
             backgroundColor: "white",
             marginBottom: 13,
             paddingHorizontal: 10,
@@ -44,7 +63,7 @@ const FormInput = ({text, placeholder, keyboardType, secureTextEntry}: Props) =>
             borderColor: "grey",
             borderWidth: 1,
             height: 40,
-            elevation: 40,
+            elevation: 4,
         },
 })
 export default FormInput;

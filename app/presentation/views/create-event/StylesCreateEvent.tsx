@@ -1,3 +1,5 @@
+
+
 import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
@@ -9,38 +11,35 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
-        fontSize: 40,
+        fontSize: 45,
+        marginTop: 60,
+        marginBottom: 30,
+    },
 
-    },
-    subTitle: {
-        textAlign: "center",
-        color: "grey",
-        fontWeight: 'bold',
-    },
-    logoContainer: {
-        alignSelf: 'center',
-        marginTop: 130,
+    imagen: {
+        width: 50,
+        height: 50,
+        marginTop: 50,
     },
     formContainer: {
         width: "95%",
         paddingVertical: 25,
         paddingHorizontal: 20,
         marginHorizontal: "auto",
-        marginTop: 80,
         borderRadius: 10,
     },
-    logo: {
-        width: 125,
-        height: 125,
-        borderRadius: 25,
-    },
+
     buttonContainer: {
         alignSelf: "center",
         paddingVertical: 20,
         elevation: 40,
         width: "100%",
-        height: "40%",
-    }
+    },
+    form:{
+        width: "100%",
+        height: "10%",
+
+    },
 
 });
 export default styles;

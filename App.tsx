@@ -5,6 +5,7 @@ import {DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import Home from "./app/presentation/views/home/Home";
 import DetailEvent from "./app/presentation/views/detail-event/DetailEvent";
 import {LoginScreen} from "./app/presentation/views/auth/Login";
+import CreateEvent from "./app/presentation/views/create-event/CreateEvent";
 
 
 const Stack= createNativeStackNavigator<RootStackParamlist>();
@@ -13,6 +14,7 @@ export type RootStackParamlist = {
   Home: undefined,
   DetailEvent: undefined,
   LoginScreen: undefined,
+  CreateEvent: undefined,
 }
 
 export default function App() {
@@ -21,6 +23,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
         <Stack.Screen name={"Home"} component={Home} />
+        <Stack.Screen name={"CreateEvent"} component={CreateEvent} />
         <Stack.Screen name={"DetailEvent"} component={DetailEvent} />
       </Stack.Navigator>
     </NavigationContainer>
