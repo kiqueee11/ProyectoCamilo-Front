@@ -4,6 +4,7 @@ import styles from "./StylesLogin";
 import React from "react";
 import FormInput from "../../components/FormInput";
 import {RoundedButton} from "../../components/RoundedButton";
+import {CustomButton} from "../../components/CustomButton";
 
 export function LoginScreen({navigation, route}: PropsStackNavigation) {
 
@@ -41,10 +42,10 @@ return (
                 //onPressFormInterface={(text) => onChangeLogin('password', text)}
             ></FormInput>
             <View style={styles.buttonContainer}>
-                <RoundedButton text={"Entrar"} onPressFromInterface={() => {
+                <CustomButton onPress={() => {
                     navigation.replace("Home")
                     //login()
-                }}></RoundedButton>
+                }} text={"Entrar"}/>
             </View>
         </View>
 
