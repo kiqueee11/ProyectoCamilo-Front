@@ -1,22 +1,16 @@
 import React, {useEffect} from 'react';
-import {Text, View, Image, FlatList} from "react-native";
+import {Text, View, Image, FlatList, Pressable} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
-<<<<<<< HEAD
-=======
 import {ParticipantItem} from "../../components/partipants/ParticipantItem";
->>>>>>> origin/grupo-1
 import {ParticipantViewModel} from "./ViewModel";
-import { ParticipantItem } from '../../components/partipants/ParticipantItem';
+import {PropsStackNavigation} from "../../interfaces/StackNav";
 
 
-
-
-const Participants = () => {
+const Participants = ({navigation}: PropsStackNavigation) => {
 
     const {participants, errorMessage, getParticipantsList} = ParticipantViewModel()
 
-<<<<<<< HEAD
     useEffect(() =>{
         if (errorMessage != ""){
             alert(errorMessage)
@@ -25,19 +19,14 @@ const Participants = () => {
 
     useEffect(() => {
         getParticipantsList("kxKVtDiqnrSc-WEct3lmGQ")
-
-=======
-    const {participant, getParticipantByEmail} = ParticipantViewModel("5Ya-tSzODho5GHgknmvezw\n");
-
-    useEffect(() => {
-        getParticipantByEmail("5Ya-tSzODho5GHgknmvezw\n")
->>>>>>> origin/grupo-1
-    }, []);
+    },[])
 
     return(
         <View style={stylesParticipants.container}>
         <View style={stylesParticipants.topSection}>
-            <Image source={require("../../../../assets/back.png")} style={stylesParticipants.icon}/>
+            <Pressable onPress={() => navigation.goBack()}>
+                <Image source={require("../../../../assets/back.png")} style={stylesParticipants.icon}/>
+            </Pressable>
             <View style={stylesParticipants.containerText}>
             <Text style={stylesParticipants.textPrincipal}>Participantes</Text>
             </View>
