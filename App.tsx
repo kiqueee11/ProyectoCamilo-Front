@@ -8,13 +8,14 @@ import {LoginScreen} from "./app/presentation/views/auth/Login";
 import CreateEvent from "./app/presentation/views/create-event/CreateEvent";
 import {NavigationContainer} from "@react-navigation/native";
 import {AsistenciaView} from "./app/presentation/views/attendance/asistencia";
+import {EventInterface} from "./app/domain/entities/Event";
 
 const Stack= createNativeStackNavigator<RootStackParamlist>();
 
 export type RootStackParamlist = {
   Home: undefined,
   Participants: undefined,
-  DetailEvent: undefined,
+  DetailEvent: { event: EventInterface },
   LoginScreen: undefined,
   CreateEvent: undefined,
   AsistenciaView: undefined,
