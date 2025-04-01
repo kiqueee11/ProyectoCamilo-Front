@@ -14,5 +14,15 @@ export class EventRepositoryImpl implements EventRepository{
             return Promise.resolve(JSON.parse(JSON.stringify(e.response?.data)));
         }
     }
+    async createEvent(title: string,description: string, date: string, location: string, type: string): Promise<EventInterface[]> {
+        try{
+            const response = await ApiDelivery.post('/v1/create/event', { title,description, date, location, type });
+            return Promise.resolve(response.data.events);
+        } catch(error){
+            let e = (error as AxiosError);
+            console.log("Error: " + JSON.stringify(e.response?.data));
+            return Promise.resolve(JSON.parse(JSON.stringify(e.response?.data)));
+        }
+    }
 
 }
