@@ -1,22 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, Image, FlatList} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
 import {AdminParticipantItem} from "../../components/partipants/AdminParticipantItem";
 import {ParticipantItem} from "../../components/partipants/ParticipantItem";
+import {ParticipantViewModel} from "./ViewModel";
+import {ParticipantInterface} from "../../../domain/entities/Participant";
+import {RenderParticipant} from "./ItemParticipant";
 
 
 const Participants = () => {
 
-    const ListParticipants = [
-        "Antonio",
-        "Sihao",
-        "Emily",
-        "Enrique",
-        "Axel",
-        "Alex",
-        "Daniel",
-    ]
+    // const ListParticipants = [
+    //     "Antonio",
+    //     "Sihao",
+    //     "Emily",
+    //     "Enrique",
+    //     "Axel",
+    //     "Alex",
+    //     "Daniel",
+    // ]
+
+    const {participant, getParticipantByEmail} = ParticipantViewModel("Prueba");
+
+    useEffect(() => {
+        getParticipantByEmail("Prueba")
+    }, []);
 
     return(
         <View style={stylesParticipants.container}>
@@ -30,12 +39,13 @@ const Participants = () => {
                 <Filtro/>
                 <View style={stylesParticipants.participantContainer}>
                     <FlatList
-                        data={ListParticipants}
-                        keyExtractor={(item, index) => index.toString()}
+                        data={participant}
+                        keyExtractor={(item) => item.id.toString()}
                         showsVerticalScrollIndicator={false}
-                        renderItem={({item})=>
-                        <ParticipantItem username={item}></ParticipantItem>
-                    }/>
+                        renderItem={({item}: {item: ParticipantInterface}) => <RenderParticipant item={item}/>}
+                        initialNumToRender={10}
+                        ListFooterComponent={<View style={{ paddingVertical: 10 }}><Text style={{ textAlign: 'center' }}>no hay más elementos</Text></View>}
+                    />
             </View>
             </View>
         </View>
