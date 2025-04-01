@@ -11,7 +11,7 @@ export function AsistenciaView() {
         { id: "4", nombre: "Emily", checked: true },
         { id: "5", nombre: "Enrique", checked: true },
         { id: "6", nombre: "Antonio", checked: true },
-        { id: "7", nombre: "sihao", checked: true },
+        { id: "7", nombre: "Sihao", checked: true },
     ]);
 
     const [personasAnotadas, setPersonasAnotadas] = useState(
@@ -34,7 +34,7 @@ export function AsistenciaView() {
         <View style={stylesAsistencia.container}>
             <Text style={stylesAsistencia.titulo}>Asistencias</Text>
             <View style={stylesAsistencia.formContainer}>
-                <Text style={stylesAsistencia.text}>*Nombre del evento*</Text>
+                <Text style={stylesAsistencia.text}> *Nombre del evento* </Text>
                 <Text style={stylesAsistencia.textDetails}>*Fecha evento*</Text>
                 <Text style={stylesAsistencia.textDetails}>*Ubicación evento*</Text>
                 <Text style={stylesAsistencia.textEvent}>Personas anotadas al evento *Nombre del evento* : {personasAnotadas}</Text>
