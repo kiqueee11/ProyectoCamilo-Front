@@ -8,7 +8,7 @@ export interface ApiDeliveryResponse {
 }
 
 export interface ApiResponse {
-    status: number;
-    data?: any;
-
+    success?: string;
+    error?: string;
+    message?: string;
 }

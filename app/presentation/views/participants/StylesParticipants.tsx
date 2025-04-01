@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import {AppColors} from "../../theme/AppTheme";
 
 
 const stylesParticipants = StyleSheet.create({
@@ -7,7 +8,7 @@ const stylesParticipants = StyleSheet.create({
         height: '100%',
         paddingHorizontal: 30,
         paddingVertical: 30,
-        //backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.backgroundColor,
     },
     icon: {
         width: 23,
@@ -40,6 +41,7 @@ const stylesParticipants = StyleSheet.create({
         borderColor: "#d3d3d3",
         borderRadius: 10,
         height: "80%",
+        elevation: 1
     },
 })
 

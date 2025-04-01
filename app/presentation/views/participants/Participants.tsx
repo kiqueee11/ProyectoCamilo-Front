@@ -12,7 +12,7 @@ type ParticipantsRouteProp = RouteProp<RootStackParamlist, 'Participants'>
 const Participants = ({navigation}: PropsStackNavigation) => {
     const route = useRoute<ParticipantsRouteProp>();
     const {slug} = route.params;
-    const {participants, errorMessage, getParticipantsList} = ParticipantViewModel()
+    const {participants, errorMessage, getParticipantsList, deleteParticipant} = ParticipantViewModel()
 
     useEffect(() =>{
         if (errorMessage != ""){
@@ -23,6 +23,13 @@ const Participants = ({navigation}: PropsStackNavigation) => {
     useEffect(() => {
         getParticipantsList(slug)
     },[])
+
+    const handleDelete = async (email:string) => {
+        console.log("correo en el padre", email)
+        console.log("slug del evento " + slug)
+        await deleteParticipant(email,slug)
+        getParticipantsList(slug)
+    }
 
     return(
         <View style={stylesParticipants.container}>
@@ -44,7 +51,7 @@ const Participants = ({navigation}: PropsStackNavigation) => {
                         showsVerticalScrollIndicator={false}
                         initialNumToRender={10}
                         renderItem={({item})=>
-                        <ParticipantItem participant={item}></ParticipantItem>}/>
+                        <ParticipantItem participant={item} onDelete={handleDelete}></ParticipantItem>}/>
 
             </View>
             </View>
