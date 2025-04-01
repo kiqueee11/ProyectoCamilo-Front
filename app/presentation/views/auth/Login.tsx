@@ -30,7 +30,7 @@ return (
                 keyboardType="email-address"
                 secureTextEntry={false}
                 editable={true}
-                //onPressFormInterface={(text) => onChangeLogin('email', text)}
+                onPressFormInterface={() => {}}
             ></FormInput>
             <FormInput
                 image={null}
@@ -39,7 +39,7 @@ return (
                 keyboardType="default"
                 secureTextEntry={true}
                 editable={true}
-                //onPressFormInterface={(text) => onChangeLogin('password', text)}
+                onPressFormInterface={() => {}}
             ></FormInput>
             <View style={styles.buttonContainer}>
                 <CustomButton onPress={() => {

@@ -5,10 +5,13 @@ import {Filtro} from "../../components/Filtro";
 import {ParticipantItem} from "../../components/partipants/ParticipantItem";
 import {ParticipantViewModel} from "./ViewModel";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
+import {RouteProp, useRoute} from "@react-navigation/native";
+import {RootStackParamlist} from "../../../../App";
 
-
+type ParticipantsRouteProp = RouteProp<RootStackParamlist, 'Participants'>
 const Participants = ({navigation}: PropsStackNavigation) => {
-
+    const route = useRoute<ParticipantsRouteProp>();
+    const {slug} = route.params;
     const {participants, errorMessage, getParticipantsList} = ParticipantViewModel()
 
     useEffect(() =>{
@@ -18,7 +21,7 @@ const Participants = ({navigation}: PropsStackNavigation) => {
     },[errorMessage])
 
     useEffect(() => {
-        getParticipantsList("kxKVtDiqnrSc-WEct3lmGQ")
+        getParticipantsList(slug)
     },[])
 
     return(
