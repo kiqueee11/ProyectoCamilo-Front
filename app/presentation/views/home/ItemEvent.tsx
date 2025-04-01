@@ -24,6 +24,9 @@ export const RenderEvent = ({item}: Props) => {
                 ubicacion={item.location}
                 userImage={require("../../../../assets/user.png")}
                 usuario={"Usuario"}
+                onPressAsistencias={() => {
+                    navigation.navigate("AsistenciaView")
+                }}
             />
         </TouchableOpacity>
     )

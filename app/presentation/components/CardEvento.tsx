@@ -8,10 +8,11 @@ interface Props{
     tipoEvento: string,
     ubicacion: string,
     userImage: any,
-    usuario: string
+    usuario: string,
+    onPressAsistencias: () => void
 }
 
-const CardEvento = ({titulo, fecha, tipoEvento, ubicacion, userImage, usuario}: Props) => {
+const CardEvento = ({titulo, fecha, tipoEvento, ubicacion, userImage, usuario, onPressAsistencias}: Props) => {
     return(
         <View style={styles.containerCardEvento}>
             <View style={styles.containerInfo}>
@@ -29,6 +30,9 @@ const CardEvento = ({titulo, fecha, tipoEvento, ubicacion, userImage, usuario}: 
                 />
                 <Text style={styles.nombreUser}>{usuario}</Text>
             </View>
+            <View style={styles.containerAsistencias}>
+                <Text onPress={onPressAsistencias} style={styles.botonAsistencias}>Ver asistencias</Text>
+            </View>
         </View>
     )
 }
@@ -42,6 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.backgroundColor,
         paddingVertical: 15,
         paddingHorizontal: 15,
+        marginVertical: 10,
         elevation: 3,
     },
     containerInfo: {
@@ -71,6 +76,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '500',
         marginLeft: 10
+    },
+    containerAsistencias:{
+        marginHorizontal: 5,
+        marginTop: 10,
+    },
+    botonAsistencias:{
+        fontWeight: 'bold',
+        textDecorationLine: 'underline'
     }
 })
 

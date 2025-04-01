@@ -2,6 +2,10 @@ import React, {useEffect} from 'react';
 import {Text, View, Image, FlatList} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
+<<<<<<< HEAD
+=======
+import {ParticipantItem} from "../../components/partipants/ParticipantItem";
+>>>>>>> origin/grupo-1
 import {ParticipantViewModel} from "./ViewModel";
 import { ParticipantItem } from '../../components/partipants/ParticipantItem';
 
@@ -12,6 +16,7 @@ const Participants = () => {
 
     const {participants, errorMessage, getParticipantsList} = ParticipantViewModel()
 
+<<<<<<< HEAD
     useEffect(() =>{
         if (errorMessage != ""){
             alert(errorMessage)
@@ -21,6 +26,12 @@ const Participants = () => {
     useEffect(() => {
         getParticipantsList("kxKVtDiqnrSc-WEct3lmGQ")
 
+=======
+    const {participant, getParticipantByEmail} = ParticipantViewModel("5Ya-tSzODho5GHgknmvezw\n");
+
+    useEffect(() => {
+        getParticipantByEmail("5Ya-tSzODho5GHgknmvezw\n")
+>>>>>>> origin/grupo-1
     }, []);
 
     return(

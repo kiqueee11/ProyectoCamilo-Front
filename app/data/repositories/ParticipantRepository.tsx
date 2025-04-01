@@ -5,6 +5,7 @@ import {ApiDelivery} from "../sources/remote/api/ApiDelivery";
 import {AxiosError} from "axios";
 
 export class ParticipantRepositoryImpl implements ParticipantRepository{
+
     async add_user_event(user: ParticipantRequest, slug:string): Promise<ApiResponse>{
         try{
             const response = await ApiDelivery.post(`/v1/events/${slug}/participants/`, user)
@@ -35,6 +36,7 @@ export class ParticipantRepositoryImpl implements ParticipantRepository{
             let e = (error as AxiosError)
             console.log("Error" + JSON.stringify(e.response?.data))
             return Promise.resolve(JSON.parse(JSON.stringify(e.response?.data)) as ParticipantsList);
+
         }
     }
 
