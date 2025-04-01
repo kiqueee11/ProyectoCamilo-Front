@@ -1,4 +1,4 @@
-export interface User{
+export interface Participant {
     id?: number,
     name: string,
     email: string,
@@ -10,6 +10,6 @@ export interface User{
     is_superuser: boolean,
 }
 
-export type ParticipantRequest = Pick<User, 'email'>
+export type ParticipantRequest = Pick<Participant, 'email'>
 
-export type ParticipantResponse = Pick<User, 'email' | 'name'>
+export type ParticipantResponse = Pick<Participant, 'email' | 'name'>
