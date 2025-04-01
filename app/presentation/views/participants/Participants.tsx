@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Text, View, Image, FlatList} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
-import {AdminParticipantItem} from "../../components/partipants/AdminParticipantItem";
 import {ParticipantItem} from "../../components/partipants/ParticipantItem";
 import {ParticipantViewModel} from "./ViewModel";
 import {ParticipantInterface} from "../../../domain/entities/Participant";
@@ -21,10 +20,10 @@ const Participants = () => {
     //     "Daniel",
     // ]
 
-    const {participant, getParticipantByEmail} = ParticipantViewModel("Prueba");
+    const {participant, getParticipantByEmail} = ParticipantViewModel("5Ya-tSzODho5GHgknmvezw\n");
 
     useEffect(() => {
-        getParticipantByEmail("Prueba")
+        getParticipantByEmail("5Ya-tSzODho5GHgknmvezw\n")
     }, []);
 
     return(

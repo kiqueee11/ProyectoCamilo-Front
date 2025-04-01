@@ -33,7 +33,7 @@ const DetailEvent = ({navigation}: PropsStackNavigation) => {
                     <View>
                         <Text style={styles.text}>Tipo de evento</Text>
                     </View>
-                    <Participants imageUser1={require('../../../../assets/user.png')} imageUser2={require('../../../../assets/user.png')} onPress={() => {}}/>
+                    <Participants imageUser1={require('../../../../assets/user.png')} imageUser2={require('../../../../assets/user.png')} onPress={() => {navigation.navigate('Participants')}}/>
                 </View>
                 <EventDescription description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}/>
                 <View style={styles.containerButton}>

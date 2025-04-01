@@ -25,12 +25,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={"Participants"} component={Participants} />
         <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
         <Stack.Screen name={"Home"} component={Home} />
         <Stack.Screen name={"AsistenciaView"} component={AsistenciaView} />
         <Stack.Screen name={"CreateEvent"} component={CreateEvent} />
         <Stack.Screen name={"DetailEvent"} component={DetailEvent} />
+        <Stack.Screen name={"Participants"} component={Participants} />
       </Stack.Navigator>
     </NavigationContainer>
   );

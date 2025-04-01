@@ -7,4 +7,5 @@ export interface ParticipantInterface{
     is_active: boolean;
     is_staff: boolean;
     is_superuser: boolean;
+    slug: string;
 }

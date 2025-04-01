@@ -4,10 +4,11 @@ import {AxiosError} from "axios";
 import {ParticipantRepository} from "../../domain/repositories/ParticipantRepository";
 
 export class ParticipantRepositoryImpl implements ParticipantRepository{
-    async getParticipantByEmail(email: string): Promise<ParticipantInterface[]> {
+    async getParticipantByEmail(slug: string): Promise<ParticipantInterface[]> {
         try{
-            const response = await ApiDelivery.post('/v1/find/participant/email', { email });
-            return Promise.resolve(response.data.events);
+            const response = await ApiDelivery.get('/v1/events/${slug}/participants/');
+            console.log(response.data)
+            return Promise.resolve(response.data);
         } catch(error){
             let e = (error as AxiosError);
             console.log("Error: " + JSON.stringify(e.response?.data));

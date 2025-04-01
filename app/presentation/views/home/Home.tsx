@@ -13,10 +13,10 @@ import {RenderEvent} from "./ItemEvent";
 
 const Home = ({navigation}:PropsStackNavigation) => {
     const [selectedDate, setSelectedDate] = useState('');
-    const {events, getEventsByTitle} = EventViewModel("Prueba");
+    const {events, getEventsByDate} = EventViewModel("2025-03-31");
 
     useEffect(() => {
-        getEventsByTitle("Prueba")
+        getEventsByDate("2025-03-31")
     }, []);
 
     return(
