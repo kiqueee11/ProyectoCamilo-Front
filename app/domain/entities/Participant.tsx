@@ -1,4 +1,3 @@
-
 export interface Participant {
     id?: number,
     name: string,
@@ -15,6 +14,6 @@ export type ParticipantRequest = Pick<Participant, 'email'>
 
 export type ParticipantResponse = Pick<Participant, 'email' | 'name'>
 
-export interface ParticipantsList{
+export interface ParticipantsList {
     users: ParticipantResponse[]
 }

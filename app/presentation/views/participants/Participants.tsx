@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react';
-import {Text, View, Image, FlatList} from "react-native";
+import {Text, View, Image, FlatList, Pressable} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
+import {ParticipantItem} from "../../components/partipants/ParticipantItem";
 import {ParticipantViewModel} from "./ViewModel";
-import { ParticipantItem } from '../../components/partipants/ParticipantItem';
+import {PropsStackNavigation} from "../../interfaces/StackNav";
 
 
-
-
-const Participants = () => {
+const Participants = ({navigation}: PropsStackNavigation) => {
 
     const {participants, errorMessage, getParticipantsList} = ParticipantViewModel()
 
@@ -20,13 +19,14 @@ const Participants = () => {
 
     useEffect(() => {
         getParticipantsList("kxKVtDiqnrSc-WEct3lmGQ")
-
-    }, []);
+    },[])
 
     return(
         <View style={stylesParticipants.container}>
         <View style={stylesParticipants.topSection}>
-            <Image source={require("../../../../assets/back.png")} style={stylesParticipants.icon}/>
+            <Pressable onPress={() => navigation.goBack()}>
+                <Image source={require("../../../../assets/back.png")} style={stylesParticipants.icon}/>
+            </Pressable>
             <View style={stylesParticipants.containerText}>
             <Text style={stylesParticipants.textPrincipal}>Participantes</Text>
             </View>
