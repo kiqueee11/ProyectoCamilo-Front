@@ -15,7 +15,7 @@ export const RenderEvent = ({item}: Props) => {
 
     return(
         <TouchableOpacity onPress={() => {
-            navigation.navigate("DetailEvent")
+            navigation.navigate("DetailEvent", {event: item})
         }}>
             <CardEvento
                 titulo={item.title}
