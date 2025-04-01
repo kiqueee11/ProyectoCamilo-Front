@@ -1,30 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, Image, FlatList} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
-import {AdminParticipantItem} from "../../components/partipants/AdminParticipantItem";
-import {ParticipantItem} from "../../components/partipants/ParticipantItem";
 import {ParticipantViewModel} from "./ViewModel";
-import {ParticipantInterface} from "../../../domain/entities/Participant";
-import {RenderParticipant} from "./ItemParticipant";
+import { ParticipantItem } from '../../components/partipants/ParticipantItem';
+
+
 
 
 const Participants = () => {
 
-    // const ListParticipants = [
-    //     "Antonio",
-    //     "Sihao",
-    //     "Emily",
-    //     "Enrique",
-    //     "Axel",
-    //     "Alex",
-    //     "Daniel",
-    // ]
+    const {participants, errorMessage, getParticipantsList} = ParticipantViewModel()
 
-    const {participant, getParticipantByEmail} = ParticipantViewModel("Prueba");
+    useEffect(() =>{
+        if (errorMessage != ""){
+            alert(errorMessage)
+        }
+    },[errorMessage])
 
     useEffect(() => {
-        getParticipantByEmail("Prueba")
+        getParticipantsList("kxKVtDiqnrSc-WEct3lmGQ")
+
     }, []);
 
     return(
@@ -39,13 +35,14 @@ const Participants = () => {
                 <Filtro/>
                 <View style={stylesParticipants.participantContainer}>
                     <FlatList
-                        data={participant}
-                        keyExtractor={(item) => item.id.toString()}
+
+                        data={participants}
+                        keyExtractor={(item, index) => index.toString()}
                         showsVerticalScrollIndicator={false}
-                        renderItem={({item}: {item: ParticipantInterface}) => <RenderParticipant item={item}/>}
                         initialNumToRender={10}
-                        ListFooterComponent={<View style={{ paddingVertical: 10 }}><Text style={{ textAlign: 'center' }}>no hay más elementos</Text></View>}
-                    />
+                        renderItem={({item})=>
+                        <ParticipantItem participant={item}></ParticipantItem>}/>
+
             </View>
             </View>
         </View>

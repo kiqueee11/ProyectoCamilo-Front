@@ -1,23 +1,29 @@
-import React, {useState} from "react";
-import {ParticipantInterface} from "../../../domain/entities/Participant";
-import {getParticipantByEmailUseCase} from "../../../domain/useCases/participants/GetParticipant";
 
+import {useState} from "react";
+import {ParticipantResponse} from "../../../domain/entities/Participant";
+import {GetParticipantListUseCase} from "../../../domain/useCases/participants/GetParticipantList";
 
-export const ParticipantViewModel = (email:string) => {
-    const [participant, setParticipant] = useState<ParticipantInterface[]>([]);
+export const ParticipantViewModel= () =>{
+    const [participants, setParticipants] = useState<ParticipantResponse[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
-    const getParticipantByEmail = async (email: string) => {
+    const getParticipantsList = async (slug:string) => {
         try{
-            const response = await getParticipantByEmailUseCase(email);
-            console.log(response);
-            setParticipant(response)
-        } catch (error) {
-            console.error("Error mostrando el participante: ", error)
+            const response = await GetParticipantListUseCase(slug)
+            console.log("RESULT" + JSON.stringify(response))
+            setParticipants(response.users)
+        }catch (error){
+
+            console.log("error" + error)
+
         }
     }
 
     return{
-        participant,
-        getParticipantByEmail
+
+        participants,
+        errorMessage,
+        getParticipantsList,
     }
+
 }

@@ -5,3 +5,8 @@ export interface ApiDeliveryResponse {
     data?: any;
     error?: any;
 }
+
+export interface ApiResponse {
+    status: number;
+    data?: any;
+}
