@@ -1,18 +1,23 @@
-import React, {useState} from 'react';
-import {KeyboardType, Text, TouchableOpacity, View} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {FlatList, Text, TouchableOpacity, View} from "react-native";
 import stylesHome from './StylesHome';
 import {Filtro} from "../../components/Filtro";
 import CardEvento from "../../components/CardEvento";
 import ButtonAddEvento from "../../components/ButtonAddEvento";
-import {useNavigation} from "@react-navigation/native";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {RootStackParamlist} from "../../../../App";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {Calendar, DateData} from "react-native-calendars";
+import {EventViewModel} from "./ViewModel";
+import {EventInterface} from "../../../domain/entities/Event";
+import {RenderEvent} from "./ItemEvent";
 
 
 const Home = ({navigation}:PropsStackNavigation) => {
     const [selectedDate, setSelectedDate] = useState('');
+    const {events, getEventsByTitle} = EventViewModel("Prueba");
+
+    useEffect(() => {
+        getEventsByTitle("Prueba")
+    }, []);
 
     return(
         <View style={stylesHome.container}>
@@ -29,18 +34,13 @@ const Home = ({navigation}:PropsStackNavigation) => {
                 />
             </View>
             <View>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate("DetailEvent")
-                }}>
-                    <CardEvento
-                        titulo={"Review title"}
-                        fecha={"28/03/2025"}
-                        tipoEvento={"Evento"}
-                        ubicacion={"Madrid, España"}
-                        userImage={require("../../../../assets/user.png")}
-                        usuario={"Usuario"}
-                    />
-                </TouchableOpacity>
+                <FlatList
+                    data={events}
+                    renderItem={({item}: {item: EventInterface}) => <RenderEvent item={item}/>}
+                    keyExtractor={(item) => item.id.toString()}
+                    initialNumToRender={10} // los que se renderizan recién se abre la app
+                    ListFooterComponent={<View style={{ paddingVertical: 10 }}><Text style={{ textAlign: 'center' }}>no hay más elementos</Text></View>}
+                />
             </View>
             <ButtonAddEvento onPress={()=>{navigation.navigate("CreateEvent")}}/>
         </View>
