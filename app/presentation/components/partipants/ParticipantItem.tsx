@@ -5,14 +5,20 @@ import {ParticipantResponse} from "../../../domain/entities/Participant";
 
 interface IParticipantItemProps{
     participant: ParticipantResponse
+    onDelete:(email: string) => void
 }
 
-export const ParticipantItem = ({participant}:IParticipantItemProps) => {
+export const ParticipantItem = ({participant, onDelete}:IParticipantItemProps) => {
 
     const [pressed, setPressed] = useState(false);
     const [deletePressed, setDeletePressed] = useState(false);
     const [addPressed, setAddPressed] = useState(false);
 
+    const confirmDelete = () => {
+        onDelete(participant.email);
+        console.log("correo en el hijo" + participant.email);
+        setDeletePressed(false)
+    };
     return(
         <View style={styles.container}>
             <View style={styles.userImgContainer}>
@@ -44,7 +50,7 @@ export const ParticipantItem = ({participant}:IParticipantItemProps) => {
                                         <Pressable onPress={() => setDeletePressed(false)}>
                                             <Text style={styles.deleteQuestionText}>NO</Text>
                                         </Pressable>
-                                        <Pressable onPress={() => setDeletePressed(false)}>
+                                        <Pressable onPress={() =>{confirmDelete()}}>
                                             <Text style={{...styles.deleteQuestionText, color: "red"}}>SÍ</Text>
                                         </Pressable>
 
@@ -85,7 +91,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     usernameText:{
-        fontSize: 24,
+        fontSize: 20,
     },
     iconsContainer:{
         display: "flex",

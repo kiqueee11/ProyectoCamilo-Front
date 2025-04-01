@@ -46,7 +46,7 @@ const DetailEvent = ({navigation}: PropsStackNavigation) => {
                 </View>
                 <EventDescription description={event.description}/>
                 <View style={styles.containerButton}>
-                    <CustomButton onPress={()=>{navigation.navigate("Participants")}} text={"VER PARTICIPANTES"}/>
+                    <CustomButton onPress={()=>{navigation.navigate("Participants", {slug:event.slug})}} text={"VER PARTICIPANTES"}/>
                 </View>
             </View>
             {pressed ?
