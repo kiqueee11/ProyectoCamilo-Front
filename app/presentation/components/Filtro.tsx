@@ -35,11 +35,4 @@ const styles = StyleSheet.create({
         height: 30,
         resizeMode: "contain"
     },
-    filtro:{
-        position: "absolute",
-        right: 22,
-        top: 35,
-        width: 20,
-        height: 20,
-    }
 })
