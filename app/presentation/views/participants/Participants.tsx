@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, Image, FlatList, Pressable} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
@@ -7,12 +7,14 @@ import {ParticipantViewModel} from "./ViewModel";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
+import {AddParticipantModal} from "../../components/partipants/ModalAddParticipant";
 
 type ParticipantsRouteProp = RouteProp<RootStackParamlist, 'Participants'>
 const Participants = ({navigation}: PropsStackNavigation) => {
     const route = useRoute<ParticipantsRouteProp>();
     const {slug} = route.params;
-    const {participants, errorMessage, getParticipantsList, deleteParticipant} = ParticipantViewModel()
+    const {participants, errorMessage, getParticipantsList, deleteParticipant, addParticipant} = ParticipantViewModel()
+    const [addPressed, setAddPressed] = useState(false);
 
     useEffect(() =>{
         if (errorMessage != ""){
@@ -30,6 +32,25 @@ const Participants = ({navigation}: PropsStackNavigation) => {
         await deleteParticipant(email,slug)
         getParticipantsList(slug)
     }
+
+    const handleAdd = async (email:string) => {
+        try {
+            console.log("Intentando añadir participante con email:", email);
+            console.log("Slug del evento:", slug);
+            await addParticipant(email, slug);
+            getParticipantsList(slug);
+        } catch (error) {
+            console.error("Error al añadir participante:", error);
+        }
+    };
+
+    const confirmAdd = (email: string) => {
+        console.log("correo en el hijo - add:", email);
+        handleAdd(email);
+        setAddPressed(false);
+    };
+
+
 
     return(
         <View style={stylesParticipants.container}>
@@ -51,9 +72,23 @@ const Participants = ({navigation}: PropsStackNavigation) => {
                         showsVerticalScrollIndicator={false}
                         initialNumToRender={10}
                         renderItem={({item})=>
-                        <ParticipantItem participant={item} onDelete={handleDelete}></ParticipantItem>}/>
+                        <ParticipantItem participant={item} onDelete={handleDelete} onAdd={handleAdd}></ParticipantItem>}/>
 
             </View>
+            </View>
+            <View >
+                <Pressable style={stylesParticipants.textBotonAdd} onPress={() =>{setAddPressed(!addPressed)}}>
+                    <Text style={stylesParticipants.textBotonAddText}>Añadir participante</Text>
+                </Pressable>
+                {addPressed ? (
+                    <AddParticipantModal
+                        onClose={() => setAddPressed(false)}
+                        onAdd={(email) => {
+                            confirmAdd(email);
+                        }}
+                    />
+                ) : null}
+
             </View>
         </View>
     )

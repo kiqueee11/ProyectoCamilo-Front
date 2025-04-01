@@ -20,7 +20,7 @@ const stylesParticipants = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         marginTop: 33,
-        marginBottom: 15,
+        marginBottom: 10,
     },
     textPrincipal:{
         textAlign:'center',
@@ -40,9 +40,28 @@ const stylesParticipants = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#d3d3d3",
         borderRadius: 10,
-        height: "80%",
+        height: 550,
         elevation: 1
     },
+    textBotonAdd: {
+        backgroundColor: '#f0f0f0',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        marginTop: 20,
+    },
+    textBotonAddText: {
+        color: 'black',
+        fontSize: 16,
+        fontWeight: 'semibold',
+    },
+
 })
 
 export default stylesParticipants;

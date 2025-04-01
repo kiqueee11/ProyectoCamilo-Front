@@ -8,7 +8,7 @@ export class ParticipantRepositoryImpl implements ParticipantRepository{
 
     async add_user_event(user: ParticipantRequest, slug:string): Promise<ApiResponse>{
         try{
-            const response = await ApiDelivery.post(`/v1/events/${slug}/participants/`, user)
+            const response = await ApiDelivery.post(`/v1/events/${slug}/participants/add`, user)
             return Promise.resolve(response.data)
         }catch (error){
             let e = (error as AxiosError)

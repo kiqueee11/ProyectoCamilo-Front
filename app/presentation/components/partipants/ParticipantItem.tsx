@@ -1,14 +1,16 @@
 import {Image, View, Text, Pressable, StyleSheet, Modal} from "react-native";
 import React, {useState} from "react";
 import {ParticipantResponse} from "../../../domain/entities/Participant";
+import {AddParticipantModal} from "./ModalAddParticipant";
 
 
 interface IParticipantItemProps{
     participant: ParticipantResponse
     onDelete:(email: string) => void
+    onAdd:(email: string) => void
 }
 
-export const ParticipantItem = ({participant, onDelete}:IParticipantItemProps) => {
+export const ParticipantItem = ({participant, onDelete, onAdd}:IParticipantItemProps) => {
 
     const [pressed, setPressed] = useState(false);
     const [deletePressed, setDeletePressed] = useState(false);
@@ -19,6 +21,12 @@ export const ParticipantItem = ({participant, onDelete}:IParticipantItemProps) =
         console.log("correo en el hijo" + participant.email);
         setDeletePressed(false)
     };
+
+    // const confirmAdd = (email: string) => {
+    //     onAdd(participant.email);
+    //     console.log("correo en el hijo" + participant.email);
+    //     setAddPressed(false)
+    // };
     return(
         <View style={styles.container}>
             <View style={styles.userImgContainer}>

@@ -1,12 +1,57 @@
-import {Image, View, Text, Pressable, StyleSheet, Modal} from "react-native";
+import React from "react";
+import {Image, View, Text, Pressable, StyleSheet, Modal, TextInput} from "react-native";
 import {useState} from "react";
-import FormInput from "../FormInput";
+import {AppColors} from "../../theme/AppTheme";
 
-interface AddParticipantModalProps {
-    onClose: () => void; // Prop para manejar el cierre del modal
+interface FormInputProps {
+    placeholder: string;
+    keyboardType: "default" | "email-address" | "numeric" | "phone-pad";
+    secureTextEntry?: boolean;
+    text: string;
+    image?: any;
+    editable: boolean;
+    onPressFormInterface: (value: string) => void;
 }
 
-export const AddParticipantModal = ({onClose}: AddParticipantModalProps) => {
+const FormInput = ({
+                       placeholder,
+                       keyboardType,
+                       secureTextEntry = false,
+                       text,
+                       image,
+                       editable,
+                       onPressFormInterface,
+                   }: FormInputProps) => {
+    return (
+        <View style={styles.inputContainer}>
+            {image && <Image source={image} style={styles.icon} />}
+            <TextInput
+                value={text}
+                onChangeText={onPressFormInterface}
+                placeholder={placeholder}
+                editable={editable}
+                keyboardType={keyboardType}
+                secureTextEntry={secureTextEntry}
+                style={styles.input}
+            />
+        </View>
+    );
+};
+
+interface AddParticipantModalProps {
+    onClose: () => void;
+    onAdd: (email: string) => void;
+}
+
+export const AddParticipantModal = ({onClose, onAdd}: AddParticipantModalProps) => {
+    const [email, setEmail] = useState("");
+
+    const handleAdd = () => {
+        onAdd(email);
+        setEmail("");
+        onClose();
+    };
+
     return (
         <Modal transparent animationType="fade">
             <View style={styles.modalBackground}>
@@ -14,15 +59,23 @@ export const AddParticipantModal = ({onClose}: AddParticipantModalProps) => {
                     <View style={styles.modalTextContainer}>
                         <Text style={styles.modalTitleText}>Añadir participante</Text>
                         <View style={styles.modalAnswerContainer}>
-                            <FormInput placeholder={""}
-                                       keyboardType={"email-address"}
-                                       secureTextEntry={false}
-                                       text={""} image={null}
-                                       editable={true}
-                                       onPressFormInterface={() =>{}}/>
-                            <Pressable onPress={onClose}>
-                                <Text style={styles.modalButtonText}>Añadir</Text>
-                            </Pressable>
+                            <FormInput
+                                placeholder="Correo electrónico"
+                                keyboardType="email-address"
+                                secureTextEntry={false}
+                                text={email}
+                                image={null}
+                                editable={true}
+                                onPressFormInterface={(value) => setEmail(value)}
+                            />
+                            <View style={styles.buttonContainer}>
+                                <Pressable onPress={handleAdd} style={styles.boton}>
+                                    <Text style={styles.botonText}>Añadir</Text>
+                                </Pressable>
+                                <Pressable onPress={onClose} style={styles.boton}>
+                                    <Text style={styles.botonText}>Cancelar</Text>
+                                </Pressable>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -32,6 +85,25 @@ export const AddParticipantModal = ({onClose}: AddParticipantModalProps) => {
 };
 
 const styles = StyleSheet.create({
+    inputContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        borderColor: "#ccc",
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        height: 40,
+        marginVertical: 10,
+    },
+    icon: {
+        width: 20,
+        height: 20,
+        marginRight: 10,
+    },
+    input: {
+        flex: 1,
+        fontSize: 16,
+    },
     modalBackground: {
         flex: 1,
         justifyContent: "center",
@@ -54,10 +126,7 @@ const styles = StyleSheet.create({
     modalTitleText: {
         fontSize: 18,
         fontWeight: "bold",
-    },
-    modalButtonText: {
-        fontSize: 16,
-        color: "blue",
+        marginBottom: 12,
     },
     modalAnswerContainer: {
         width: "90%",
@@ -66,4 +135,25 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "center",
     },
+    buttonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: 10,
+    },
+    boton: {
+        backgroundColor: AppColors.primary,
+        padding: 15,
+        borderRadius: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 12,
+        elevation: 2,
+    },
+    botonText: {
+        color: "black",
+        fontWeight: "semibold",
+    },
 });
+
+export default FormInput;
