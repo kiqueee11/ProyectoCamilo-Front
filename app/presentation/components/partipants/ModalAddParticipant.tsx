@@ -1,5 +1,6 @@
 import {Image, View, Text, Pressable, StyleSheet, Modal} from "react-native";
 import {useState} from "react";
+import FormInput from "../FormInput";
 
 interface AddParticipantModalProps {
     onClose: () => void; // Prop para manejar el cierre del modal
@@ -13,6 +14,12 @@ export const AddParticipantModal = ({onClose}: AddParticipantModalProps) => {
                     <View style={styles.modalTextContainer}>
                         <Text style={styles.modalTitleText}>Añadir participante</Text>
                         <View style={styles.modalAnswerContainer}>
+                            <FormInput placeholder={""}
+                                       keyboardType={"email-address"}
+                                       secureTextEntry={false}
+                                       text={""} image={null}
+                                       editable={true}
+                                       onPressFormInterface={() =>{}}/>
                             <Pressable onPress={onClose}>
                                 <Text style={styles.modalButtonText}>Añadir</Text>
                             </Pressable>
@@ -53,10 +60,10 @@ const styles = StyleSheet.create({
         color: "blue",
     },
     modalAnswerContainer: {
-        marginTop: 40,
         width: "90%",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         justifyContent: "space-evenly",
+        alignItems: "center",
     },
 });

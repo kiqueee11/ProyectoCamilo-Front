@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Text, View} from "react-native";
 import { styles } from "./StylesDetailEvent";
 import {CustomButton} from "../../components/CustomButton";
@@ -10,8 +10,11 @@ import {EventDate} from "../../components/detail-event/EventDate";
 import {EventLocation} from "../../components/detail-event/EventLocation";
 import {Participants} from "../../components/detail-event/Participants";
 import {EventDescription} from "../../components/detail-event/EventDescription";
+import {AddParticipantModal} from "../../components/partipants/ModalAddParticipant";
 
 const DetailEvent = ({navigation}: PropsStackNavigation) => {
+    const [pressed, setPressed] = useState<boolean>(false);
+
     return(
         <View style={styles.container}>
             <View style={styles.back}>
@@ -33,14 +36,19 @@ const DetailEvent = ({navigation}: PropsStackNavigation) => {
                     <View>
                         <Text style={styles.text}>Tipo de evento</Text>
                     </View>
-                    <Participants imageUser1={require('../../../../assets/user.png')} imageUser2={require('../../../../assets/user.png')} onPress={() => {navigation.navigate('Participants')}}/>
+                    <Participants imageUser1={require('../../../../assets/user.png')} imageUser2={require('../../../../assets/user.png')} onPress={() => {setPressed(true)}}/>
                 </View>
                 <EventDescription description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}/>
                 <View style={styles.containerButton}>
                     <CustomButton onPress={()=>{navigation.navigate("Participants")}} text={"VER PARTICIPANTES"}/>
                 </View>
             </View>
+            {pressed ?
+                <AddParticipantModal onClose={() => setPressed(false)}/>
+                : null}
         </View>
+
+
     )
 }
 
