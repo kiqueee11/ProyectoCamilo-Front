@@ -13,3 +13,7 @@ export interface Participant {
 export type ParticipantRequest = Pick<Participant, 'email'>
 
 export type ParticipantResponse = Pick<Participant, 'email' | 'name'>
+
+export interface ParticipantsList{
+    users: ParticipantResponse[]
+}

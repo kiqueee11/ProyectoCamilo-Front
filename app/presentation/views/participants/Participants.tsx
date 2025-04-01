@@ -1,22 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, Image, FlatList} from "react-native";
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
-import {AdminParticipantItem} from "../../components/partipants/AdminParticipantItem";
 import {ParticipantItem} from "../../components/partipants/ParticipantItem";
+import {ParticipantViewModel} from "./ViewModel";
 
 
 const Participants = () => {
 
-    const ListParticipants = [
-        "Antonio",
-        "Sihao",
-        "Emily",
-        "Enrique",
-        "Axel",
-        "Alex",
-        "Daniel",
-    ]
+    const {participants, errorMessage, getParticipantsList} = ParticipantViewModel()
+
+    useEffect(() =>{
+        if (errorMessage != ""){
+            alert(errorMessage)
+        }
+    },[errorMessage])
+
+    useEffect(() => {
+        getParticipantsList("kxKVtDiqnrSc-WEct3lmGQ")
+    }, []);
 
     return(
         <View style={stylesParticipants.container}>
@@ -30,11 +32,11 @@ const Participants = () => {
                 <Filtro/>
                 <View style={stylesParticipants.participantContainer}>
                     <FlatList
-                        data={ListParticipants}
+                        data={participants}
                         keyExtractor={(item, index) => index.toString()}
                         showsVerticalScrollIndicator={false}
                         renderItem={({item})=>
-                        <ParticipantItem username={item}></ParticipantItem>
+                        <ParticipantItem participant={item}></ParticipantItem>
                     }/>
             </View>
             </View>
