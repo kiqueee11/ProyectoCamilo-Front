@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, TouchableOpacity, View} from "react-native";
+import {FlatList, Text, TouchableOpacity, useWindowDimensions, View} from "react-native";
 import stylesHome from './StylesHome';
 import {Filtro} from "../../components/Filtro";
-import CardEvento from "../../components/CardEvento";
 import ButtonAddEvento from "../../components/ButtonAddEvento";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {Calendar, DateData} from "react-native-calendars";
+import CardEvento from "../../components/CardEvento";
 import {EventViewModel} from "./ViewModel";
 import {EventInterface} from "../../../domain/entities/Event";
 import {RenderEvent} from "./ItemEvent";
@@ -13,10 +13,11 @@ import {RenderEvent} from "./ItemEvent";
 
 const Home = ({navigation}:PropsStackNavigation) => {
     const [selectedDate, setSelectedDate] = useState('');
-    const {events, getEventsByTitle} = EventViewModel("Prueba");
+    const {events, getEventsByDate} = EventViewModel("2025-03-31");
+    const { height } = useWindowDimensions();
 
     useEffect(() => {
-        getEventsByTitle("Prueba")
+        getEventsByDate("2025-03-31")
     }, []);
 
     return(
@@ -33,12 +34,14 @@ const Home = ({navigation}:PropsStackNavigation) => {
                     }}
                 />
             </View>
-            <View>
+            <View style={stylesHome.containerEvent}>
                 <FlatList
                     data={events}
                     renderItem={({item}: {item: EventInterface}) => <RenderEvent item={item}/>}
                     keyExtractor={(item) => item.id.toString()}
                     initialNumToRender={10} // los que se renderizan recién se abre la app
+                    windowSize={10}
+                    style={{maxHeight: height * 0.4}}
                     ListFooterComponent={<View style={{ paddingVertical: 10 }}><Text style={{ textAlign: 'center' }}>no hay más elementos</Text></View>}
                 />
             </View>
