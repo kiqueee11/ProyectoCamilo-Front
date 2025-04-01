@@ -1,4 +1,4 @@
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
-import {RootStackParamlist} from "../../../App";
+import {RootStackParamsList} from "../../../App";
 
-export interface PropsStackNavigation extends NativeStackScreenProps<RootStackParamlist> {}
+export interface PropsStackNavigation extends NativeStackScreenProps<RootStackParamsList>{}
