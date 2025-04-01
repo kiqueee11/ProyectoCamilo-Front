@@ -5,11 +5,18 @@ import {Filtro} from "../../components/Filtro";
 import ButtonAddEvento from "../../components/ButtonAddEvento";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {Calendar, DateData} from "react-native-calendars";
-import CardEvento from "../../components/CardEvento";
+import {EventViewModel} from "./ViewModel";
+import {EventInterface} from "../../../domain/entities/Event";
+import {RenderEvent} from "./ItemEvent";
 
 
 const Home = ({navigation}:PropsStackNavigation) => {
     const [selectedDate, setSelectedDate] = useState('');
+    const {events, getEventsByTitle} = EventViewModel("Prueba");
+
+    useEffect(() => {
+        getEventsByTitle("Prueba")
+    }, []);
 
     return(
         <View style={stylesHome.container}>
@@ -26,21 +33,13 @@ const Home = ({navigation}:PropsStackNavigation) => {
                 />
             </View>
             <View>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate("DetailEvent")
-                }}>
-                    <CardEvento
-                        titulo={"Review title"}
-                        fecha={"01/04/2025"}
-                        tipoEvento={"Evento"}
-                        ubicacion={"Madrid"}
-                        userImage={require("../../../../assets/user.png")}
-                        usuario={"Usuario"}
-                        onPressAsistencias={() => {
-                            navigation.navigate("AsistenciaView")
-                        }}
-                    />
-                </TouchableOpacity>
+                <FlatList
+                    data={events}
+                    renderItem={({item}: {item: EventInterface}) => <RenderEvent item={item}/>}
+                    keyExtractor={(item) => item.id.toString()}
+                    initialNumToRender={10} // los que se renderizan recién se abre la app
+                    ListFooterComponent={<View style={{ paddingVertical: 10 }}><Text style={{ textAlign: 'center' }}>no hay más elementos</Text></View>}
+                />
             </View>
             <ButtonAddEvento onPress={()=>{navigation.navigate("CreateEvent")}}/>
         </View>
