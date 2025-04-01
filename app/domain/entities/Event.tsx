@@ -8,4 +8,5 @@ export interface EventInterface{
     location: string;
     type: string;
     stars?: number;
+    slug: string;
 }
