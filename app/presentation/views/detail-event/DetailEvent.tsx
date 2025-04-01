@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Text, View} from "react-native";
 import { styles } from "./StylesDetailEvent";
 import {CustomButton} from "../../components/CustomButton";
@@ -10,8 +10,17 @@ import {EventDate} from "../../components/detail-event/EventDate";
 import {EventLocation} from "../../components/detail-event/EventLocation";
 import {Participants} from "../../components/detail-event/Participants";
 import {EventDescription} from "../../components/detail-event/EventDescription";
+import {AddParticipantModal} from "../../components/partipants/ModalAddParticipant";
+import {RouteProp, useRoute} from "@react-navigation/native";
+import {RootStackParamlist} from "../../../../App";
+
+type DetailEventRouteProp = RouteProp<RootStackParamlist, 'DetailEvent'>
 
 const DetailEvent = ({navigation}: PropsStackNavigation) => {
+    const route = useRoute<DetailEventRouteProp>();
+    const {event} = route.params;
+
+    const [pressed, setPressed] = useState<boolean>(false);
     return(
         <View style={styles.container}>
             <View style={styles.back}>
@@ -23,24 +32,29 @@ const DetailEvent = ({navigation}: PropsStackNavigation) => {
                     <ActionButtons onPressBorrar={() => {}} onPressEditar={() => {}}/>
                 </View>
                 <View>
-                    <Text style={styles.textTitulo}>Titulo del evento</Text>
+                    <Text style={styles.textTitulo}>{event.title}</Text>
                 </View>
                 <View style={styles.containerTop}>
-                    <EventDate date={"28/03/2025"}/>
-                    <EventLocation location={"Madrid, España"}/>
+                    <EventDate date={event.date}/>
+                    <EventLocation location={event.location}/>
                 </View>
                 <View style={styles.containerTop}>
                     <View>
-                        <Text style={styles.text}>Tipo de evento</Text>
+                        <Text style={styles.text}>{event.type}</Text>
                     </View>
-                    <Participants imageUser1={require('../../../../assets/user.png')} imageUser2={require('../../../../assets/user.png')} onPress={() => {navigation.navigate('Participants')}}/>
+                    <Participants imageUser1={require('../../../../assets/user.png')} imageUser2={require('../../../../assets/user.png')} onPress={() => {setPressed(true)}}/>
                 </View>
-                <EventDescription description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}/>
+                <EventDescription description={event.description}/>
                 <View style={styles.containerButton}>
                     <CustomButton onPress={()=>{navigation.navigate("Participants")}} text={"VER PARTICIPANTES"}/>
                 </View>
             </View>
+            {pressed ?
+                <AddParticipantModal onClose={() => setPressed(false)}/>
+                : null}
         </View>
+
+
     )
 }
 
