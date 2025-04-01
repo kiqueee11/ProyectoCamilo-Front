@@ -1,11 +1,18 @@
 import {Image, View, Text, Pressable, StyleSheet, Modal} from "react-native";
 import {useState} from "react";
 
-interface IParticipantItemProps{
-    username: string
+// interface IParticipantItemProps{
+//     username: string
+// }
+
+interface Props{
+    name: string,
+    email: string,
+    phone: string,
+    userImage: any,
 }
 
-export const ParticipantItem = ({username}:IParticipantItemProps) => {
+export const ParticipantItem = ({name, email, phone, userImage}: Props) => {
 
     const [pressed, setPressed] = useState(false);
     const [deletePressed, setDeletePressed] = useState(false);
@@ -13,9 +20,11 @@ export const ParticipantItem = ({username}:IParticipantItemProps) => {
     return(
         <View style={styles.container}>
             <View style={styles.userImgContainer}>
-                <Image source={require("../../../../assets/participants/user_image.png")}
+                <Image source={userImage}
                 style={styles.userImg}/>
-                <Text style={styles.usernameText}>{username}</Text>
+                <Text style={styles.usernameText}>{name}</Text>
+                <Text style={styles.usernameText}>{email}</Text>
+                <Text style={styles.usernameText}>{phone}</Text>
             </View>
 
             <View style={styles.iconsContainer}>
