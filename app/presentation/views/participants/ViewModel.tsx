@@ -5,10 +5,16 @@ import {GetParticipantListUseCase} from "../../../domain/useCases/participants/G
 import {DeleteParticipantUseCase} from "../../../domain/useCases/participants/DeleteParticipantUseCase";
 import participants from "./Participants";
 import {AddParticipantUseCase} from "../../../domain/useCases/participants/AddParticipantUseCase";
+import {RouteProp, useRoute} from "@react-navigation/native";
+import {RootStackParamlist} from "../../../../App";
+
+type ParticipantsRouteProp = RouteProp<RootStackParamlist, 'Participants'>
 
 export const ParticipantViewModel= () => {
     const [participants, setParticipants] = useState<ParticipantResponse[]>([]);
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const route = useRoute<ParticipantsRouteProp>();
+    const {slug} = route.params;
 
     const getParticipantsList = async (slug: string) => {
         try {
@@ -51,5 +57,6 @@ export const ParticipantViewModel= () => {
         getParticipantsList,
         deleteParticipant,
         addParticipant,
+        slug
     }
 }

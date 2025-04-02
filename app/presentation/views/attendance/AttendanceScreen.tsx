@@ -1,18 +1,15 @@
 import React, {useState, useCallback, useEffect} from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import viewModel from './AttendanceViewModel';
-import stylesAsistencia from "./styleAsistencia";
+import viewModel from './ViewModel';
+import stylesAsistencia from "./StylesAttendances";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 
 type DetailEventRouteProp = RouteProp<RootStackParamlist, 'DetailEvent'>
 
-
-
-
-const AsistenciaView = ({navigation}: PropsStackNavigation) => {
+const AttendanceScreen = ({navigation}: PropsStackNavigation) => {
     const routeEvent = useRoute<DetailEventRouteProp>();
     const {event} = routeEvent.params;
     const {
@@ -22,28 +19,16 @@ const AsistenciaView = ({navigation}: PropsStackNavigation) => {
 
     useEffect(() => {
         loadAttenders(event.slug);
-        // loadAttenders("EGW5NRthVusIuhHPX-bWsA");
-        console.log(attenders);
     }, []);
 
     const handleShowParticipant = async (id: number) => {
         try{
             console.log("Participante con id:", id);
-            console.log("Slug del evento actual:", "\n" +
-                "EGW5NRthVusIuhHPX-bWsA");
+            console.log("Slug del evento actual:", "EGW5NRthVusIuhHPX-bWsA");
         } catch (e) {
             console.error( "Error al mostrar el participante: " ,e);
-
         }
     }
-
-//    const [personasAnotadas, setPersonasAnotadas] = useState(
-//        asistentes.filter(item => item.checked).length
-//    );
-
-//    useEffect(() =>{
-//        setPersonasAnotadas(asistentes.filter(item => item.checked).length);
-//    }, [asistentes]);
 
     return (
         <View style={stylesAsistencia.container}>
@@ -52,8 +37,9 @@ const AsistenciaView = ({navigation}: PropsStackNavigation) => {
                 <Text style={stylesAsistencia.text}> {event.title} </Text>
                 <Text style={stylesAsistencia.textDetails}>{event.date}</Text>
                 <Text style={stylesAsistencia.textDetails}>{event.location}</Text>
-                <Text style={stylesAsistencia.textEvent}>Personas anotadas al evento {event.title} : {}</Text>
-
+                <Text style={stylesAsistencia.textEvent}>Registrados: </Text>
+                <Text style={stylesAsistencia.textEvent}>No asisten:</Text>
+                <Text style={stylesAsistencia.textEvent}>Asistentes:</Text>
                 <FlatList
                     data={attenders}
                     keyExtractor={(item) => item.id.toString()}
@@ -61,7 +47,6 @@ const AsistenciaView = ({navigation}: PropsStackNavigation) => {
                     renderItem={({ item }) => (
                         <View style={stylesAsistencia.listItems}>
                             <Text style={stylesAsistencia.listText}>{item.user.name}</Text>
-
                         </View>
                     )}
                 />
@@ -70,6 +55,6 @@ const AsistenciaView = ({navigation}: PropsStackNavigation) => {
     );
 }
 
-export default AsistenciaView;
+export default AttendanceScreen;
 
 

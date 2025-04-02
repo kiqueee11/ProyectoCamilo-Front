@@ -8,12 +8,18 @@ import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
 import {AddParticipantModal} from "../../components/partipants/ModalAddParticipant";
+import {viewModel} from "../attendance/ViewModel";
 
-type ParticipantsRouteProp = RouteProp<RootStackParamlist, 'Participants'>
+
 const Participants = ({navigation}: PropsStackNavigation) => {
-    const route = useRoute<ParticipantsRouteProp>();
-    const {slug} = route.params;
-    const {participants, errorMessage, getParticipantsList, deleteParticipant, addParticipant} = ParticipantViewModel()
+    const {
+        participants,
+        errorMessage,
+        getParticipantsList,
+        deleteParticipant,
+        addParticipant,
+        slug
+    } = ParticipantViewModel()
     const [addPressed, setAddPressed] = useState(false);
 
     useEffect(() =>{
