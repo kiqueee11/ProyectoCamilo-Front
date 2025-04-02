@@ -95,5 +95,50 @@ export const styles = StyleSheet.create({
     },
     containerButton:{
         bottom: 0,
-    }
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modalContent: {
+        width: "80%",
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 20,
+        alignItems: "center",
+        elevation: 5,
+    },
+    modalText: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginBottom: 15,
+        textAlign: "center",
+    },
+    modalButtons: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%",
+    },
+    modalButton: {
+        flex: 1,
+        padding: 10,
+        borderRadius: 20,
+        backgroundColor: "#ccc",
+        alignItems: "center",
+        marginHorizontal: 5,
+    },
+    modalButtonDelete: {
+        flex: 1,
+        padding: 10,
+        borderRadius: 20,
+        backgroundColor: "red",
+        alignItems: "center",
+        marginHorizontal: 5,
+    },
+    modalButtonText: {
+        fontSize: 16,
+        fontWeight: "bold",
+    },
 })

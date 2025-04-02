@@ -53,4 +53,15 @@ export class EventRepositoryImpl implements EventRepository{
             return Promise.reject(e.response?.data);
         }
     }
+
+    async deleteEvent(evento: EventInterface, id: number): Promise<ApiResponse> {
+        try {
+            const response = await ApiDelivery.delete(`v1/delete/event/${id}/`);
+            return Promise.resolve(response.data);
+        } catch (error) {
+            let e = error as AxiosError;
+            console.log("Error: " + JSON.stringify(e.response?.data));
+            return Promise.resolve(JSON.parse(JSON.stringify(e.response?.data)) as ApiResponse);
+        }
+    }
 }

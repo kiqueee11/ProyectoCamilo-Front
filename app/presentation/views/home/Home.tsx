@@ -12,12 +12,13 @@ import {RenderEvent} from "./ItemEvent";
 
 
 const Home = ({navigation}:PropsStackNavigation) => {
-    const [selectedDate, setSelectedDate] = useState('');
+    const today = new Date().toISOString().split('T')[0];
+    const [selectedDate, setSelectedDate] = useState(today);
     const {events, getEventsByDate} = EventViewModel("2025-03-31");
     const { height } = useWindowDimensions();
 
     useEffect(() => {
-        getEventsByDate("2025-03-31")
+        getEventsByDate(selectedDate);
     }, []);
 
     return(
