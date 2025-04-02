@@ -7,6 +7,7 @@ import { RoundedButton } from "../../components/RoundedButton";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { EventRepositoryImpl } from "../../../data/repositories/EventRepository";
 import styles from "../create-event/StylesCreateEvent";
+import {BackButton} from "../../components/detail-event/BackButton";
 
 const UpdateEvent = ({ navigation, route }: PropsStackNavigation) => {
     const eventRepository = new EventRepositoryImpl();
@@ -42,7 +43,9 @@ const UpdateEvent = ({ navigation, route }: PropsStackNavigation) => {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.imagen} source={require("../../../../assets/icono-atras.png")} />
+            <View style={styles.back}>
+                <BackButton onPress={() => navigation.navigate("DetailEvent")} />
+            </View>
             <Text style={styles.title}>Editar evento</Text>
             <View style={styles.formContainer}>
                 <FormInput

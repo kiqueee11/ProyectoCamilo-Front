@@ -9,6 +9,7 @@ import {RoundedButton} from "../../components/RoundedButton";
 import DatePicker from "react-native-date-picker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { EventRepositoryImpl } from "../../../data/repositories/EventRepository";
+import {BackButton} from "../../components/detail-event/BackButton";
 
 
 const CreateEvent = ({navigation}: PropsStackNavigation) => {
@@ -65,7 +66,9 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.imagen} source={require("../../../../assets/icono-atras.png")} />
+            <View style={styles.back}>
+                <BackButton onPress={() => navigation.navigate("Home")} />
+            </View>
             <Text style={styles.title}>Creación del evento</Text>
             <View style={styles.formContainer}>
                 <View>
