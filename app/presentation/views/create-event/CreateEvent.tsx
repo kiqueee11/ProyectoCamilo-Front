@@ -76,6 +76,7 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
                         keyboardType="default"
                         secureTextEntry={false}
                         editable={true}
+                        value={null}
                         onPressFormInterface={(text) => setTitle(text)}
                     ></FormInput>
                 </View>
@@ -87,6 +88,7 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
                     keyboardType="default"
                     secureTextEntry={false}
                     editable={true}
+                    value={null}
                     onPressFormInterface={(text) => setDescription(text)}
                 ></FormInput>
 
@@ -97,6 +99,8 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
                         keyboardType="default"
                         secureTextEntry={false}
                         editable={true}
+
+                        value={null}
                         onPressFormInterface={(text) => setLocation(text)}
                     ></FormInput>
 
@@ -108,6 +112,7 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
                         keyboardType="default"
                         secureTextEntry={false}
                         editable={false}
+                        value={null}
                         onPressFormInterface={(text) => null}
                     ></FormInput>
                 </TouchableOpacity>
@@ -129,6 +134,8 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
                         keyboardType="default"
                         secureTextEntry={false}
                         editable={true}
+
+                        value={null}
                         onPressFormInterface={(text) => setType(text)}
                     ></FormInput>
                 <View style={styles.buttonContainer}>

@@ -75,7 +75,7 @@ const UpdateEvent = ({ navigation, route }: PropsStackNavigation) => {
                     value={location}
                     onPressFormInterface={(text) => setLocation(text)}
                 />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => setDatePickerVisibility(true)}>
                     <FormInput
                         image={require("../../../../assets/icono-calendario.png")}
                         text={"Fecha"}
@@ -84,7 +84,7 @@ const UpdateEvent = ({ navigation, route }: PropsStackNavigation) => {
                         secureTextEntry={false}
                         editable={false}
                         value={null}
-                        onPressFormInterface={(text) => setDatePickerVisibility(true)}
+                        onPressFormInterface={(text) => null}
                     />
                 </TouchableOpacity>
                 <DateTimePickerModal
