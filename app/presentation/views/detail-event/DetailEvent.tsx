@@ -16,6 +16,7 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamlist } from "../../../../App";
 import { ParticipantViewModel } from "../participants/ViewModel";
 import { DetailEventViewModel } from "./ViewModel";
+import UpdateEvent from "../update-event/UpdateEvent";
 
 type DetailEventRouteProp = RouteProp<RootStackParamlist, "DetailEvent">;
 
@@ -47,7 +48,7 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
             <View style={styles.containerDetailEvent}>
                 <View style={styles.containerTop}>
                     <UserInfo username={"Usuario"} imageUser={require('../../../../assets/user.png')} />
-                    <ActionButtons onPressBorrar={() => setModalVisible(true)} onPressEditar={() => {}} />
+                    <ActionButtons onPressBorrar={() => setModalVisible(true)} onPressEditar={() => navigation.navigate("UpdateEvent")} />
                 </View>
                 <Text style={styles.textTitulo}>{event.title}</Text>
                 <View style={styles.containerTop}>

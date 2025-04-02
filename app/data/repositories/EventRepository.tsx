@@ -2,6 +2,7 @@ import {EventInterface} from "../../domain/entities/Event";
 import {ApiDelivery} from "../sources/remote/api/ApiDelivery";
 import {AxiosError} from "axios";
 import {EventRepository} from "../../domain/repositories/EventRepository";
+import {ApiResponse} from "../sources/remote/models/ResponseApiDelivery";
 
 export class EventRepositoryImpl implements EventRepository{
     async getEventsByTitle(title: string): Promise<EventInterface[]> {
@@ -38,7 +39,7 @@ export class EventRepositoryImpl implements EventRepository{
 
     async updateEvent(eventId: number, title: string, description: string, date: string, location: string, type: string): Promise<EventInterface> {
         try {
-            const response = await ApiDelivery.put(`/v1/update/event/{eventId}`, {
+            const response = await ApiDelivery.put(`/v1/update/event/${eventId}`, {
                 title,
                 description,
                 date,

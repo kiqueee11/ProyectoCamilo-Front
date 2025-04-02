@@ -30,6 +30,7 @@ return (
                 keyboardType="email-address"
                 secureTextEntry={false}
                 editable={true}
+                value={null}
                 onPressFormInterface={() => {}}
             ></FormInput>
             <FormInput
@@ -39,6 +40,7 @@ return (
                 keyboardType="default"
                 secureTextEntry={true}
                 editable={true}
+                value={null}
                 onPressFormInterface={() => {}}
             ></FormInput>
             <View style={styles.buttonContainer}>

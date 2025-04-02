@@ -9,6 +9,7 @@ import CreateEvent from "./app/presentation/views/create-event/CreateEvent";
 import {NavigationContainer} from "@react-navigation/native";
 import {AsistenciaView} from "./app/presentation/views/attendance/asistencia";
 import {EventInterface} from "./app/domain/entities/Event";
+import UpdateEvent from "./app/presentation/views/update-event/UpdateEvent";
 
 const Stack= createNativeStackNavigator<RootStackParamlist>();
 
@@ -19,6 +20,7 @@ export type RootStackParamlist = {
   LoginScreen: undefined,
   CreateEvent: undefined,
   AsistenciaView: undefined,
+  UpdateEvent: undefined,
 }
 
 export default function App() {
@@ -31,6 +33,7 @@ export default function App() {
         <Stack.Screen name={"AsistenciaView"} component={AsistenciaView} />
         <Stack.Screen name={"CreateEvent"} component={CreateEvent} />
         <Stack.Screen name={"DetailEvent"} component={DetailEvent} />
+        <Stack.Screen name={"UpdateEvent"} component={UpdateEvent} />
       </Stack.Navigator>
     </NavigationContainer>
   );

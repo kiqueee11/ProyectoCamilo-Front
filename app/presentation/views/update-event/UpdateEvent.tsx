@@ -8,7 +8,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { EventRepositoryImpl } from "../../../data/repositories/EventRepository";
 import styles from "../create-event/StylesCreateEvent";
 
-const EditEvent = ({ navigation, route }: PropsStackNavigation) => {
+const UpdateEvent = ({ navigation, route }: PropsStackNavigation) => {
     const eventRepository = new EventRepositoryImpl();
     const { event } = route.params; // Recibimos el evento desde la navegación
 
@@ -115,4 +115,4 @@ const EditEvent = ({ navigation, route }: PropsStackNavigation) => {
     );
 };
 
-export default EditEvent;
+export default UpdateEvent;
