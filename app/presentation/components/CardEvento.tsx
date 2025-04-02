@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.backgroundColor,
         paddingVertical: 15,
         paddingHorizontal: 15,
+        marginVertical: 10,
         elevation: 3,
     },
     containerInfo: {

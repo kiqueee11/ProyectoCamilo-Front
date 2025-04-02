@@ -3,9 +3,10 @@ export interface EventInterface{
     title: string;
     description: string;
     date: string;
-    host: string | null;
-    users: string[];
+    host: number;
+    users: number;
     location: string;
     type: string;
     stars?: number;
+    slug: string;
 }
