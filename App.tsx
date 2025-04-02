@@ -7,9 +7,9 @@ import DetailEvent from "./app/presentation/views/detail-event/DetailEvent";
 import {LoginScreen} from "./app/presentation/views/auth/Login";
 import CreateEvent from "./app/presentation/views/create-event/CreateEvent";
 import {NavigationContainer} from "@react-navigation/native";
-import {AsistenciaView} from "./app/presentation/views/attendance/asistencia";
 import {EventInterface} from "./app/domain/entities/Event";
 import UpdateEvent from "./app/presentation/views/update-event/UpdateEvent";
+import AttendanceScreen from "./app/presentation/views/attendance/AttendanceScreen";
 
 const Stack= createNativeStackNavigator<RootStackParamlist>();
 
@@ -19,8 +19,8 @@ export type RootStackParamlist = {
   DetailEvent: { event: EventInterface },
   LoginScreen: undefined,
   CreateEvent: undefined,
-  AsistenciaView: undefined,
-  UpdateEvent: undefined,
+  UpdateEvent: { event: EventInterface },
+  AttendaceScreen: {event: EventInterface},
 }
 
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
         <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
         <Stack.Screen name={"Participants"} component={Participants} />
         <Stack.Screen name={"Home"} component={Home} />
-        <Stack.Screen name={"AsistenciaView"} component={AsistenciaView} />
+        <Stack.Screen name={"AttendaceScreen"} component={AttendanceScreen} />
         <Stack.Screen name={"CreateEvent"} component={CreateEvent} />
         <Stack.Screen name={"DetailEvent"} component={DetailEvent} />
         <Stack.Screen name={"UpdateEvent"} component={UpdateEvent} />

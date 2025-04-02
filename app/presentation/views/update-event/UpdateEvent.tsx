@@ -1,16 +1,19 @@
 import { PropsStackNavigation } from "../../interfaces/StackNav";
-import { Text, View, Image, TouchableOpacity } from "react-native";
+import { Text, View,TouchableOpacity } from "react-native";
 import FormInput from "../../components/FormInput";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { RoundedButton } from "../../components/RoundedButton";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { EventRepositoryImpl } from "../../../data/repositories/EventRepository";
 import styles from "../create-event/StylesCreateEvent";
 import {BackButton} from "../../components/detail-event/BackButton";
-
-const UpdateEvent = ({ navigation, route }: PropsStackNavigation) => {
+import {RouteProp, useRoute} from "@react-navigation/native";
+import {RootStackParamlist} from "../../../../App";
+type UpdateEventRouteProp = RouteProp<RootStackParamlist, "UpdateEvent">;
+const UpdateEvent = ({ navigation}: PropsStackNavigation) => {
     const eventRepository = new EventRepositoryImpl();
+    const route = useRoute<UpdateEventRouteProp>();
     const { event } = route.params; // Recibimos el evento desde la navegación
 
     const [fdate, setDate] = useState(new Date(event.date));
@@ -44,7 +47,7 @@ const UpdateEvent = ({ navigation, route }: PropsStackNavigation) => {
     return (
         <View style={styles.container}>
             <View style={styles.back}>
-                <BackButton onPress={() => navigation.navigate("DetailEvent")} />
+                <BackButton onPress={() => navigation.goBack()} />
             </View>
             <Text style={styles.title}>Editar evento</Text>
             <View style={styles.formContainer}>

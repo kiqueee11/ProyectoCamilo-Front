@@ -1,7 +1,11 @@
 import {Image, View, Text, Pressable, StyleSheet, Modal} from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ParticipantResponse} from "../../../domain/entities/Participant";
-import {AddParticipantModal} from "./ModalAddParticipant";
+import {viewModel} from "../../views/attendance/ViewModel";
+import {ParticipantViewModel} from "../../views/participants/ViewModel";
+import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
+import {getEventAttendersUseCase} from "../../../domain/useCases/attendances/GetEventAttenders";
+
 
 
 interface IParticipantItemProps{
@@ -15,6 +19,32 @@ export const ParticipantItem = ({participant, onDelete, onAdd}:IParticipantItemP
     const [pressed, setPressed] = useState(false);
     const [deletePressed, setDeletePressed] = useState(false);
     const [addPressed, setAddPressed] = useState(false);
+
+    const {
+        createAttendanceDTO,
+        createUpdateAttendanceDTO,
+        addAttendanceParticipant,
+    } = viewModel()
+
+    const {
+        slug,
+    } = ParticipantViewModel()
+
+
+    const loadAttendersCheckerArray = async () => {
+        try {
+            const response = await getEventAttendersUseCase(slug);
+            if (response.some(attendance => attendance.user.name === participant.name)) {
+                 setPressed(true);
+            }
+        } catch (error) {
+            console.error("Error loading attenders:", error);
+        }
+    }
+    useEffect(()=> {
+        loadAttendersCheckerArray()
+    }, [])
+
 
     const confirmDelete = () => {
         onDelete(participant.email);
@@ -37,7 +67,14 @@ export const ParticipantItem = ({participant, onDelete, onAdd}:IParticipantItemP
             </View>
 
             <View style={styles.iconsContainer}>
-                <Pressable onPress={() => {setPressed(!pressed)}}>
+                <Pressable onPress={async () => {
+                    setPressed(!pressed)
+                    if (pressed) {
+                        await createUpdateAttendanceUseCase(createUpdateAttendanceDTO(false, participant.email, slug))
+                    } else {
+                        await createUpdateAttendanceUseCase(createUpdateAttendanceDTO(true, participant.email, slug))
+                    }
+                }}>
                     {pressed ?
                         <Image source={require("../../../../assets/participants/check_box_filled.png")}/>
                         :
