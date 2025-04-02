@@ -46,15 +46,17 @@ const stylesAsistencia = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 10,
+        paddingVertical: 5,
         borderBottomColor: 'black',
     },
     listText: {
         fontSize: 16,
         color: 'black',
+        fontStyle: 'italic'
     },
+
     contentContainer: {
-        paddingTop: 87 ,
+        paddingTop: 20,
         paddingBottom: 87,
     }
 });
