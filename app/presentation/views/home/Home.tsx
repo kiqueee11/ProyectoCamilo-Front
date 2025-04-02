@@ -19,7 +19,7 @@ const Home = ({navigation}:PropsStackNavigation) => {
 
     useEffect(() => {
         getEventsByDate(selectedDate);
-    }, []);
+    }, [selectedDate]);
 
     return(
         <View style={stylesHome.container}>

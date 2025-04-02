@@ -39,7 +39,7 @@ export class EventRepositoryImpl implements EventRepository{
 
     async updateEvent(eventId: number, title: string, description: string, date: string, location: string, type: string): Promise<EventInterface> {
         try {
-            const response = await ApiDelivery.put(`/v1/update/event/${eventId}`, {
+            const response = await ApiDelivery.post(`/v1/edit/event/${eventId}`, {
                 title,
                 description,
                 date,

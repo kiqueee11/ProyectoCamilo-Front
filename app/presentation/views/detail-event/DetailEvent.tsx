@@ -48,7 +48,7 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
             <View style={styles.containerDetailEvent}>
                 <View style={styles.containerTop}>
                     <UserInfo username={"Usuario"} imageUser={require('../../../../assets/user.png')} />
-                    <ActionButtons onPressBorrar={() => setModalVisible(true)} onPressEditar={() => navigation.navigate("UpdateEvent")} />
+                    <ActionButtons onPressBorrar={() => setModalVisible(true)} onPressEditar={() => navigation.navigate("UpdateEvent", {event})} />
                 </View>
                 <Text style={styles.textTitulo}>{event.title}</Text>
                 <View style={styles.containerTop}>
