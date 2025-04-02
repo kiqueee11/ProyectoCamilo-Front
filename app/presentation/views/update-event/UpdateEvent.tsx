@@ -2,7 +2,6 @@ import { PropsStackNavigation } from "../../interfaces/StackNav";
 import { Text, View,TouchableOpacity } from "react-native";
 import FormInput from "../../components/FormInput";
 import React, { useState } from "react";
-
 import { RoundedButton } from "../../components/RoundedButton";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { EventRepositoryImpl } from "../../../data/repositories/EventRepository";
@@ -10,6 +9,7 @@ import styles from "../create-event/StylesCreateEvent";
 import {BackButton} from "../../components/detail-event/BackButton";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
+import Toast from "react-native-toast-message";
 type UpdateEventRouteProp = RouteProp<RootStackParamlist, "UpdateEvent">;
 const UpdateEvent = ({ navigation}: PropsStackNavigation) => {
     const eventRepository = new EventRepositoryImpl();
@@ -36,11 +36,23 @@ const UpdateEvent = ({ navigation}: PropsStackNavigation) => {
                 location,
                 type
             );
-            alert("Evento actualizado exitosamente");
-            navigation.replace("Home");
+            Toast.show({
+                type: "success",
+                text1: "Evento actualizado exitosamente",
+                position: "bottom",
+            })
+
+            setTimeout(() => {
+                navigation.replace("Home");
+            }, 1000);
+
         } catch (error) {
             console.error("Error al actualizar el evento:", error);
-            alert("Error al actualizar el evento");
+            Toast.show({
+                type: "error",
+                text1: "Error al actualizar el evento",
+                position: "bottom",
+            })
         }
     };
 
@@ -117,6 +129,7 @@ const UpdateEvent = ({ navigation}: PropsStackNavigation) => {
                     <RoundedButton text={"Actualizar evento"} onPressFromInterface={handleUpdateEvent} />
                 </View>
             </View>
+            <Toast/>
         </View>
     );
 };

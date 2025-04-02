@@ -16,9 +16,6 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamlist } from "../../../../App";
 import { ParticipantViewModel } from "../participants/ViewModel";
 import { DetailEventViewModel } from "./ViewModel";
-import UpdateEvent from "../update-event/UpdateEvent";
-import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
-import {attendanceViewModel} from "../attendance/AttendanceViewModel";
 import * as yup from "yup";
 import Toast from "react-native-toast-message";
 

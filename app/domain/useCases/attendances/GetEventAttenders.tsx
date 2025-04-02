@@ -1,4 +1,4 @@
-import {Attendance} from "../../entities/Attendance";
+
 import {AttendancesRepository} from "../../../data/repositories/AttendancesRepository"
 
 

@@ -1,12 +1,11 @@
-import React, {useState, useCallback, useEffect} from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
-import viewModel, {attendanceViewModel} from './AttendanceViewModel';
+import React, { useEffect} from "react";
+import { View, Text,  FlatList} from "react-native";
+import {attendanceViewModel} from './AttendanceViewModel';
 import stylesAsistencia from "./StylesAttendances";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
-import {getEventAttendancesStatsUseCase} from "../../../domain/useCases/attendances/GetEventStats";
+
 
 type DetailEventRouteProp = RouteProp<RootStackParamlist, 'DetailEvent'>
 

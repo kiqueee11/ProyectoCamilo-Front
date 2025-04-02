@@ -1,9 +1,7 @@
-
 import {useState} from "react";
 import {ParticipantRequest, ParticipantResponse} from "../../../domain/entities/Participant";
 import {GetParticipantListUseCase} from "../../../domain/useCases/participants/GetParticipantList";
 import {DeleteParticipantUseCase} from "../../../domain/useCases/participants/DeleteParticipantUseCase";
-import participants from "./Participants";
 import {AddParticipantUseCase} from "../../../domain/useCases/participants/AddParticipantUseCase";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";

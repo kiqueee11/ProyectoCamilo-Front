@@ -1,5 +1,5 @@
 import {Attendance, AttendanceStadistics, CreateUpdateAttendance} from "../../domain/entities/Attendance";
-import {Axios, AxiosError} from "axios";
+import { AxiosError} from "axios";
 import {ApiDelivery} from "../sources/remote/api/ApiDelivery";
 import {AttendancesRepositoryInterface} from "../../domain/repositories/AttendancesRepositoryInterface";
 

@@ -1,15 +1,14 @@
 import {PropsStackNavigation} from "../../interfaces/StackNav";
-import {Text, View, Image, TouchableOpacity} from "react-native";
-
+import {Text, View, TouchableOpacity} from "react-native";
+import * as yup from 'yup';
 import FormInput from "../../components/FormInput";
 import React, {useState} from "react";
 import styles from "./StylesCreateEvent";
-import stylesHome from "../home/StylesHome";
 import {RoundedButton} from "../../components/RoundedButton";
-import DatePicker from "react-native-date-picker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { EventRepositoryImpl } from "../../../data/repositories/EventRepository";
 import {BackButton} from "../../components/detail-event/BackButton";
+import Toast from "react-native-toast-message";
 
 
 const CreateEvent = ({navigation}: PropsStackNavigation) => {
@@ -33,7 +32,25 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
         location,
         type,
     });
+        const eventSchema = yup.object().shape({
+            title: yup.string().required("Título necesario"),
+            description: yup.string().min(5, "La descripción debe contener más caracteres"),
+            date: yup.date()
+                .required("Fecha obligatoria")
+                .min(new Date(), "La fecha debe ser posterior a hoy"),
+            location: yup.string().required("Ubicación obligatoria"),
+            type: yup.string().max(30, "El tipo debe contener menos caracteres"),
+        });
     try {
+        const eventData = {
+            title: title,
+            description: description,
+            date: date,
+            location: location,
+            type: type
+        };
+
+        await eventSchema.validate(eventData)
         const response = await eventRepository.createEvent(
             title,
             description,
@@ -48,19 +65,38 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
         } else {
             console.log("Respuesta JSON:", response);
         }
-    
-        alert("Evento creado exitosamente");
-        navigation.replace("Home");
+        Toast.show({
+            type: "success",
+            text1: "Evento creado exitosamente",
+            position: "bottom",
+        })
+
+        setTimeout(() => {
+            navigation.replace("Home");
+        }, 1000);
     } catch (error) {
-        console.error("Error al crear el evento:", error);
-        if ((error as any)?.response) {
-            console.log("Respuesta del servidor:", (error as any).response.data);
-        } else if (error instanceof Error) {
-            console.log("Error sin respuesta del servidor:", error.message);
-        } else {
-            console.log("Error desconocido:", error);
+        if (error instanceof yup.ValidationError) {
+            Toast.show({
+                type: "error",
+                text1: error instanceof Error ? error.message : "Ocurrió un error inesperado",
+                position: "bottom"
+            })
+        }else {
+            console.error("Error al crear el evento:", error);
+            if ((error as any)?.response) {
+                console.log("Respuesta del servidor:", (error as any).response.data);
+            } else if (error instanceof Error) {
+                console.log("Error sin respuesta del servidor:", error.message);
+            } else {
+                console.log("Error desconocido:", error);
+            }
+            Toast.show({
+                type: "error",
+                text1: "Error al crear el evento",
+                position: "bottom",
+            })
         }
-        alert("Error al crear el evento");
+
     }
 };
 
@@ -148,6 +184,7 @@ const CreateEvent = ({navigation}: PropsStackNavigation) => {
                     }}></RoundedButton>
                 </View>
             </View>
+            <Toast/>
         </View>
     )
 }

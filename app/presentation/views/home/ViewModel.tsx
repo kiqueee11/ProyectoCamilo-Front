@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {EventInterface} from "../../../domain/entities/Event";
 import {getEventsByDateUseCase, getEventsByTitleUseCase} from "../../../domain/useCases/events/GetEvents";
 

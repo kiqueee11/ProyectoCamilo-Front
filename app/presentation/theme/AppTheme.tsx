@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export const AppColors = {
     primary: "#D9D9D9",

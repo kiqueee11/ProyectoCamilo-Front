@@ -155,5 +155,3 @@ const styles = StyleSheet.create({
         fontWeight: "semibold",
     },
 });
-
-export default FormInput;

@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, TouchableOpacity, useWindowDimensions, View} from "react-native";
+import {FlatList, Text, useWindowDimensions, View} from "react-native";
 import stylesHome from './StylesHome';
 import {Filtro} from "../../components/Filtro";
 import ButtonAddEvento from "../../components/ButtonAddEvento";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {Calendar, DateData} from "react-native-calendars";
-import CardEvento from "../../components/CardEvento";
 import {EventViewModel} from "./ViewModel";
 import {EventInterface} from "../../../domain/entities/Event";
 import {RenderEvent} from "./ItemEvent";

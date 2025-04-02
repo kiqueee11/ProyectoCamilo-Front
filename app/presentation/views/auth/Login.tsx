@@ -1,9 +1,8 @@
 import {PropsStackNavigation} from "../../interfaces/StackNav";
-import {View, Text, Button, Image} from "react-native";
+import {View, Text,Image} from "react-native";
 import styles from "./StylesLogin";
 import React from "react";
 import FormInput from "../../components/FormInput";
-import {RoundedButton} from "../../components/RoundedButton";
 import {CustomButton} from "../../components/CustomButton";
 
 export function LoginScreen({navigation, route}: PropsStackNavigation) {

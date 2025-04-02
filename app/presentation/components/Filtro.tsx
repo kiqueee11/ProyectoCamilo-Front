@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, TouchableOpacity, StyleSheet, TextInput, View, Image} from "react-native";
+import {StyleSheet, TextInput, View, Image} from "react-native";
 import {AppColors} from "../theme/AppTheme";
 
 export const Filtro = () => {

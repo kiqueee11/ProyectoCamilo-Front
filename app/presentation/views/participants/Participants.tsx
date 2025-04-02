@@ -7,7 +7,6 @@ import {ParticipantItem} from "../../components/partipants/ParticipantItem";
 import {ParticipantViewModel} from "./ViewModel";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {AddParticipantModal} from "../../components/partipants/ModalAddParticipant";
-import {attendanceViewModel} from "../attendance/AttendanceViewModel";
 import Toast from "react-native-toast-message";
 
 
@@ -20,11 +19,7 @@ const Participants = ({navigation}: PropsStackNavigation) => {
         slug
     } = ParticipantViewModel()
 
-    const {
-        createAttendanceDTO,
-    } = attendanceViewModel()
     const [addPressed, setAddPressed] = useState(false);
-    const [error, setError] = useState("");
 
     const emailSchema = yup.object().shape({
         email: yup.string().required("Correo necesario").email("Correo inválido")

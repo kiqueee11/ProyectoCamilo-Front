@@ -18,12 +18,10 @@ export const ParticipantItem = ({participant, onDelete, onAdd}:IParticipantItemP
 
     const [pressed, setPressed] = useState(false);
     const [deletePressed, setDeletePressed] = useState(false);
-    const [addPressed, setAddPressed] = useState(false);
+
 
     const {
-        createAttendanceDTO,
         createUpdateAttendanceDTO,
-        addAttendanceParticipant,
     } = attendanceViewModel()
 
     const {
