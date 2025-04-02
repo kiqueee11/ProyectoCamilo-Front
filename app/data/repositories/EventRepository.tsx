@@ -35,4 +35,22 @@ export class EventRepositoryImpl implements EventRepository{
             return Promise.resolve(JSON.parse(JSON.stringify(e.response?.data)));
         }
     }
+
+    async updateEvent(eventId: number, title: string, description: string, date: string, location: string, type: string): Promise<EventInterface> {
+        try {
+            const response = await ApiDelivery.put(`/v1/update/event/{eventId}`, {
+                title,
+                description,
+                date,
+                location,
+                type,
+            });
+
+            return Promise.resolve(response.data.event);
+        } catch (error) {
+            let e = error as AxiosError;
+            console.log("Error al actualizar evento: ", e.response?.data);
+            return Promise.reject(e.response?.data);
+        }
+    }
 }
