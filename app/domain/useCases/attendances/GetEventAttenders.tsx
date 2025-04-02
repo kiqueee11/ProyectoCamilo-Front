@@ -4,6 +4,6 @@ import {AttendancesRepository} from "../../../data/repositories/AttendancesRepos
 
 const {getEventAttenders} = new AttendancesRepository()
 
-export const getEventAttendersUseCase = async (eventId: number) => {
-    return await getEventAttenders(eventId)
+export const getEventAttendersUseCase = async (eventSlug: string) => {
+    return await getEventAttenders(eventSlug)
 }

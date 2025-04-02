@@ -1,42 +1,63 @@
 import React, {useState, useCallback, useEffect} from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
+import viewModel from './AttendanceViewModel';
 import stylesAsistencia from "./styleAsistencia";
+import {RouteProp, useRoute} from "@react-navigation/native";
+import {RootStackParamlist} from "../../../../App";
+import {PropsStackNavigation} from "../../interfaces/StackNav";
 
-export function AsistenciaView() {
+type DetailEventRouteProp = RouteProp<RootStackParamlist, 'DetailEvent'>
 
-    const [personasAnotadas, setPersonasAnotadas] = useState(
-        asistentes.filter(item => item.checked).length
-    );
 
-    const toggleCheckbox = useCallback((id: string) => {
-        setAsistentes((prevAsistentes) =>
-            prevAsistentes.map(item =>
-                item.id === id ? { ...item, checked: !item.checked } : item
-            )
-        );
+
+
+const AsistenciaView = ({navigation}: PropsStackNavigation) => {
+    const routeEvent = useRoute<DetailEventRouteProp>();
+    const {event} = routeEvent.params;
+    const {
+        attenders,
+        loadAttenders,
+    }= viewModel.attendanceViewModel()
+
+    useEffect(() => {
+        loadAttenders(event.slug);
     }, []);
 
-    useEffect(() =>{
-        setPersonasAnotadas(asistentes.filter(item => item.checked).length);
-    }, [asistentes]);
+    const handleShowParticipant = async (id: number) => {
+        try{
+            console.log("Participante con id:", id);
+            console.log("Slug del evento actual:", event.slug);
+        } catch (e) {
+            console.error( "Error al mostrar el participante: " ,e);
+
+        }
+    }
+
+//    const [personasAnotadas, setPersonasAnotadas] = useState(
+//        asistentes.filter(item => item.checked).length
+//    );
+
+//    useEffect(() =>{
+//        setPersonasAnotadas(asistentes.filter(item => item.checked).length);
+//    }, [asistentes]);
 
     return (
         <View style={stylesAsistencia.container}>
             <Text style={stylesAsistencia.titulo}>Asistencias</Text>
             <View style={stylesAsistencia.formContainer}>
-                <Text style={stylesAsistencia.text}> *Nombre del evento* </Text>
-                <Text style={stylesAsistencia.textDetails}>*Fecha evento*</Text>
-                <Text style={stylesAsistencia.textDetails}>*Ubicación evento*</Text>
-                <Text style={stylesAsistencia.textEvent}>Personas anotadas al evento *Nombre del evento* : {personasAnotadas}</Text>
+                <Text style={stylesAsistencia.text}> {event.title} </Text>
+                <Text style={stylesAsistencia.textDetails}>{event.date}</Text>
+                <Text style={stylesAsistencia.textDetails}>{event.location}</Text>
+                <Text style={stylesAsistencia.textEvent}>Personas anotadas al evento {event.title} : {}</Text>
 
                 <FlatList
-                    data={asistentes}
+                    data={attenders}
                     keyExtractor={(item) => item.id.toString()}
                     style={stylesAsistencia.contentContainer}
                     renderItem={({ item }) => (
                         <View style={stylesAsistencia.listItems}>
-                            <Text style={stylesAsistencia.listText}>{item.nombre}</Text>
+                            <Text style={stylesAsistencia.listText}>{item.user.name}</Text>
 
                         </View>
                     )}
@@ -45,5 +66,7 @@ export function AsistenciaView() {
         </View>
     );
 }
+
+export default AsistenciaView;
 
 

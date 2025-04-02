@@ -7,8 +7,8 @@ import DetailEvent from "./app/presentation/views/detail-event/DetailEvent";
 import {LoginScreen} from "./app/presentation/views/auth/Login";
 import CreateEvent from "./app/presentation/views/create-event/CreateEvent";
 import {NavigationContainer} from "@react-navigation/native";
-import {AsistenciaView} from "./app/presentation/views/attendance/asistencia";
 import {EventInterface} from "./app/domain/entities/Event";
+import AsistenciaView from "./app/presentation/views/attendance/asistencia";
 
 const Stack= createNativeStackNavigator<RootStackParamlist>();
 
