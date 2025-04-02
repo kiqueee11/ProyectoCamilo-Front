@@ -1,11 +1,12 @@
 import React, {useState, useCallback, useEffect} from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import viewModel from './AttendanceViewModel';
+import viewModel, {attendanceViewModel} from './AttendanceViewModel';
 import stylesAsistencia from "./StylesAttendances";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
+import {getEventAttendancesStatsUseCase} from "../../../domain/useCases/attendances/GetEventStats";
 
 type DetailEventRouteProp = RouteProp<RootStackParamlist, 'DetailEvent'>
 
@@ -15,10 +16,13 @@ const AttendanceScreen = ({navigation}: PropsStackNavigation) => {
     const {
         attenders,
         loadAttenders,
-    }= viewModel.attendanceViewModel()
+        eventStats,
+        getEventAttendanceStats
+    }= attendanceViewModel()
 
     useEffect(() => {
         loadAttenders(event.slug);
+        getEventAttendanceStats(event.slug);
     }, []);
 
     const handleShowParticipant = async (id: number) => {
@@ -37,16 +41,16 @@ const AttendanceScreen = ({navigation}: PropsStackNavigation) => {
                 <Text style={stylesAsistencia.text}> {event.title} </Text>
                 <Text style={stylesAsistencia.textDetails}>{event.date}</Text>
                 <Text style={stylesAsistencia.textDetails}>{event.location}</Text>
-                <Text style={stylesAsistencia.textEvent}>Registrados: </Text>
-                <Text style={stylesAsistencia.textEvent}>No asisten:</Text>
-                <Text style={stylesAsistencia.textEvent}>Asistentes:</Text>
+                <Text style={stylesAsistencia.textEvent}>Registrados: {eventStats?.registered} </Text>
+                <Text style={stylesAsistencia.textEvent}>No asisten: {eventStats?.missing}</Text>
+                <Text style={stylesAsistencia.textEvent}>Asistentes: {eventStats?.attenders}</Text>
                 <FlatList
                     data={attenders}
                     keyExtractor={(item) => item.id.toString()}
                     style={stylesAsistencia.contentContainer}
                     renderItem={({ item }) => (
                         <View style={stylesAsistencia.listItems}>
-                            <Text style={stylesAsistencia.listText}>{item.user.name}</Text>
+                            <Text style={stylesAsistencia.listText}>- {item.user.name}</Text>
                         </View>
                     )}
                 />
