@@ -7,7 +7,7 @@ import {AttendancesRepositoryInterface} from "../../domain/repositories/Attendan
 export class AttendancesRepository implements AttendancesRepositoryInterface {
     async getEventAttenders(eventId: number): Promise<Attendance[]> {
         try {
-            const response = await ApiDelivery.post(`events/${eventId}/attenders`)
+            const response = await ApiDelivery.get(`events/${eventId}/attenders`)
             return Promise.resolve(response.data)
         } catch (error) {
             let e = (error as AxiosError);
