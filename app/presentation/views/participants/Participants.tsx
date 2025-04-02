@@ -8,7 +8,8 @@ import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
 import {AddParticipantModal} from "../../components/partipants/ModalAddParticipant";
-import {viewModel} from "../attendance/ViewModel";
+import {attendanceViewModel} from "../attendance/AttendanceViewModel";
+import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
 
 
 const Participants = ({navigation}: PropsStackNavigation) => {
@@ -20,6 +21,10 @@ const Participants = ({navigation}: PropsStackNavigation) => {
         addParticipant,
         slug
     } = ParticipantViewModel()
+
+    const {
+        createAttendanceDTO,
+    } = attendanceViewModel()
     const [addPressed, setAddPressed] = useState(false);
 
     useEffect(() =>{

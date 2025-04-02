@@ -19,6 +19,7 @@ export class AttendancesRepository implements AttendancesRepositoryInterface {
     async createUpdateAttendance(attendance: CreateUpdateAttendance): Promise<string> {
         try {
             const response = await ApiDelivery.post('attendances', attendance);
+            console.log(response);
             return Promise.resolve(response.data)
         } catch (error) {
             let e = (error as AxiosError);

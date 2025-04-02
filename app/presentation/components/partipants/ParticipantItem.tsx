@@ -1,7 +1,7 @@
 import {Image, View, Text, Pressable, StyleSheet, Modal} from "react-native";
 import React, {useEffect, useState} from "react";
 import {ParticipantResponse} from "../../../domain/entities/Participant";
-import {viewModel} from "../../views/attendance/ViewModel";
+import {attendanceViewModel} from "../../views/attendance/AttendanceViewModel";
 import {ParticipantViewModel} from "../../views/participants/ViewModel";
 import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
 import {getEventAttendersUseCase} from "../../../domain/useCases/attendances/GetEventAttenders";
@@ -24,7 +24,7 @@ export const ParticipantItem = ({participant, onDelete, onAdd}:IParticipantItemP
         createAttendanceDTO,
         createUpdateAttendanceDTO,
         addAttendanceParticipant,
-    } = viewModel()
+    } = attendanceViewModel()
 
     const {
         slug,
