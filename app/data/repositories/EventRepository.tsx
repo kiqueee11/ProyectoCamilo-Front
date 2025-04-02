@@ -2,6 +2,7 @@ import {EventInterface} from "../../domain/entities/Event";
 import {ApiDelivery} from "../sources/remote/api/ApiDelivery";
 import {AxiosError} from "axios";
 import {EventRepository} from "../../domain/repositories/EventRepository";
+import {ApiResponse} from "../sources/remote/models/ResponseApiDelivery";
 
 export class EventRepositoryImpl implements EventRepository{
     async getEventsByTitle(title: string): Promise<EventInterface[]> {
@@ -33,6 +34,17 @@ export class EventRepositoryImpl implements EventRepository{
             let e = (error as AxiosError);
             console.log("Error: " + JSON.stringify(e.response?.data));
             return Promise.resolve(JSON.parse(JSON.stringify(e.response?.data)));
+        }
+    }
+
+    async deleteEvent(evento: EventInterface, id: number): Promise<ApiResponse> {
+        try {
+            const response = await ApiDelivery.delete(`v1/delete/event/${id}/`);
+            return Promise.resolve(response.data);
+        } catch (error) {
+            let e = error as AxiosError;
+            console.log("Error: " + JSON.stringify(e.response?.data));
+            return Promise.resolve(JSON.parse(JSON.stringify(e.response?.data)) as ApiResponse);
         }
     }
 }
