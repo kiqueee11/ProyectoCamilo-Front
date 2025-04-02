@@ -27,6 +27,12 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
     const { loading, handleDeleteEvent } = DetailEventViewModel();
     const [addPressed, setAddPressed] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
+    const dateObj = new Date(event.date);
+    const formattedDate = new Intl.DateTimeFormat("es-ES", {
+        day:  "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    }).format(dateObj);
 
     const handleAddParticipant = async (email: string) => {
         try {
@@ -47,12 +53,12 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
             </View>
             <View style={styles.containerDetailEvent}>
                 <View style={styles.containerTop}>
-                    <UserInfo username={event?.host?.name || "Anónimo"} imageUser={require('../../../../assets/user.png')} />
+                    <UserInfo username={item?.host?.name || "Anónimo"} imageUser={require('../../../../assets/user.png')} />
                     <ActionButtons onPressBorrar={() => setModalVisible(true)} onPressEditar={() => {}} />
                 </View>
                 <Text style={styles.textTitulo}>{event.title}</Text>
                 <View style={styles.containerTop}>
-                    <EventDate date={event.date} />
+                    <EventDate date={formattedDate} />
                     <EventLocation location={event.location} />
                 </View>
                 <View style={styles.containerTop}>

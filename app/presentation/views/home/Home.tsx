@@ -14,12 +14,16 @@ import {RenderEvent} from "./ItemEvent";
 const Home = ({navigation}:PropsStackNavigation) => {
     const today = new Date().toISOString().split('T')[0];
     const [selectedDate, setSelectedDate] = useState(today);
-    const {events, getEventsByDate} = EventViewModel("2025-03-31");
+    const {events, getEventsByDate} = EventViewModel();
     const { height } = useWindowDimensions();
+    const [lastDate, setLastDate] = useState<string | null>(null);
 
     useEffect(() => {
-        getEventsByDate(selectedDate);
-    }, []);
+        if (selectedDate !== lastDate) {
+            getEventsByDate(selectedDate);
+            setLastDate(selectedDate);
+        }
+    }, [selectedDate]);
 
     return(
         <View style={stylesHome.container}>
