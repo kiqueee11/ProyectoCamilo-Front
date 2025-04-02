@@ -12,6 +12,12 @@ interface Props{
 
 export const RenderEvent = ({item}: Props) => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamlist>>();
+    const dateObj = new Date(item.date);
+    const formattedDate = new Intl.DateTimeFormat("es-ES", {
+        day:  "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    }).format(dateObj);
 
     return(
         <TouchableOpacity onPress={() => {
@@ -19,7 +25,7 @@ export const RenderEvent = ({item}: Props) => {
         }}>
             <CardEvento
                 titulo={item.title}
-                fecha={item.date}
+                fecha={formattedDate}
                 tipoEvento={item.type}
                 ubicacion={item.location}
                 userImage={require("../../../../assets/user.png")}
