@@ -21,6 +21,7 @@ type DetailEventRouteProp = RouteProp<RootStackParamlist, "DetailEvent">;
 
 const DetailEvent = ({ navigation }: PropsStackNavigation) => {
     const route = useRoute<DetailEventRouteProp>();
+    console.log("Datos recibidos en DetailEvent:", route.params);
     const { event } = route.params;
     const { getParticipantsList, addParticipant } = ParticipantViewModel();
     const { loading, handleDeleteEvent } = DetailEventViewModel();
@@ -46,7 +47,7 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
             </View>
             <View style={styles.containerDetailEvent}>
                 <View style={styles.containerTop}>
-                    <UserInfo username={"Usuario"} imageUser={require('../../../../assets/user.png')} />
+                    <UserInfo username={event?.host?.name || "Anónimo"} imageUser={require('../../../../assets/user.png')} />
                     <ActionButtons onPressBorrar={() => setModalVisible(true)} onPressEditar={() => {}} />
                 </View>
                 <Text style={styles.textTitulo}>{event.title}</Text>
@@ -54,8 +55,8 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
                     <EventDate date={event.date} />
                     <EventLocation location={event.location} />
                 </View>
-                <Text style={styles.text}>{event.type}</Text>
                 <View style={styles.containerTop}>
+                <Text style={styles.text}>{event.type}</Text>
                     <Participants
                         imageUser1={require('../../../../assets/user.png')}
                         imageUser2={require('../../../../assets/user.png')}
