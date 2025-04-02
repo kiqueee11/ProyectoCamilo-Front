@@ -17,7 +17,7 @@ import { RootStackParamlist } from "../../../../App";
 import { ParticipantViewModel } from "../participants/ViewModel";
 import { DetailEventViewModel } from "./ViewModel";
 import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
-import {viewModel} from "../attendance/ViewModel";
+import {attendanceViewModel} from "../attendance/AttendanceViewModel";
 
 type DetailEventRouteProp = RouteProp<RootStackParamlist, "DetailEvent">;
 
@@ -36,16 +36,11 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
         year: "numeric"
     }).format(dateObj);
 
-    const {
-        createAttendanceDTO,
-    } = viewModel()
-
     const handleAddParticipant = async (email: string) => {
         try {
             console.log("Añadiendo participante con email:", email);
             console.log("Slug del evento actual:", event.slug);
             await addParticipant(email, event.slug);
-            await createUpdateAttendanceUseCase(createAttendanceDTO(false, email, event.slug));
             getParticipantsList(event.slug);
             setAddPressed(false);
         } catch (error) {

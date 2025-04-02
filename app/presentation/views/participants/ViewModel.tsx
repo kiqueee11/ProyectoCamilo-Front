@@ -7,6 +7,8 @@ import participants from "./Participants";
 import {AddParticipantUseCase} from "../../../domain/useCases/participants/AddParticipantUseCase";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
+import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
+import {attendanceViewModel} from "../attendance/AttendanceViewModel";
 
 type ParticipantsRouteProp = RouteProp<RootStackParamlist, 'Participants'>
 
@@ -15,6 +17,10 @@ export const ParticipantViewModel= () => {
     const [errorMessage, setErrorMessage] = useState<string>("");
     const route = useRoute<ParticipantsRouteProp>();
     const {slug} = route.params;
+
+    const {
+        createAttendanceDTO,
+    } = attendanceViewModel()
 
     const getParticipantsList = async (slug: string) => {
         try {
@@ -46,6 +52,7 @@ export const ParticipantViewModel= () => {
         }
         try{
             const response = await AddParticipantUseCase(data, slug)
+            await createUpdateAttendanceUseCase(createAttendanceDTO(false, email, slug));
             console.log("RESULT" + JSON.stringify(response))
         }catch (error){
             console.log("error" + JSON.stringify(error))

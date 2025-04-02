@@ -4,7 +4,7 @@ import {getEventAttendersUseCase} from "../../../domain/useCases/attendances/Get
 import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
 
 
-export const viewModel = () => {
+export const attendanceViewModel = () => {
     const [attenders, setAttenders] = useState<Attendance[]>([])
 
     const loadAttenders= async (eventSlug: string) => {
@@ -45,4 +45,4 @@ export const viewModel = () => {
         addAttendanceParticipant,
     }
 }
-export default {attendanceViewModel: viewModel};
+export default {attendanceViewModel}

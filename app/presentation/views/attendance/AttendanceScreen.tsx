@@ -1,7 +1,7 @@
 import React, {useState, useCallback, useEffect} from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import viewModel from './ViewModel';
+import viewModel from './AttendanceViewModel';
 import stylesAsistencia from "./StylesAttendances";
 import {RouteProp, useRoute} from "@react-navigation/native";
 import {RootStackParamlist} from "../../../../App";
