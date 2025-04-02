@@ -14,7 +14,6 @@ type ParticipantsRouteProp = RouteProp<RootStackParamlist, 'Participants'>
 
 export const ParticipantViewModel= () => {
     const [participants, setParticipants] = useState<ParticipantResponse[]>([]);
-    const [errorMessage, setErrorMessage] = useState<string>("");
     const route = useRoute<ParticipantsRouteProp>();
     const {slug} = route.params;
 
@@ -60,7 +59,6 @@ export const ParticipantViewModel= () => {
     }
     return {
         participants,
-        errorMessage,
         getParticipantsList,
         deleteParticipant,
         addParticipant,

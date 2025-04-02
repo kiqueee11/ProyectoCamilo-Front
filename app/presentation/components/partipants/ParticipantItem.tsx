@@ -1,5 +1,5 @@
 import {Image, View, Text, Pressable, StyleSheet, Modal} from "react-native";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {ParticipantResponse} from "../../../domain/entities/Participant";
 import {attendanceViewModel} from "../../views/attendance/AttendanceViewModel";
 import {ParticipantViewModel} from "../../views/participants/ViewModel";
@@ -35,7 +35,7 @@ export const ParticipantItem = ({participant, onDelete, onAdd}:IParticipantItemP
         try {
             const response = await getEventAttendersUseCase(slug);
             if (response.some(attendance => attendance.user.name === participant.name)) {
-                 setPressed(true);
+                setPressed(true);
             }
         } catch (error) {
             console.error("Error loading attenders:", error);

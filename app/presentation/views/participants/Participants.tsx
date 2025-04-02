@@ -1,21 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View, Image, FlatList, Pressable} from "react-native";
+import * as yup from 'yup';
 import stylesParticipants from "./StylesParticipants";
 import {Filtro} from "../../components/Filtro";
 import {ParticipantItem} from "../../components/partipants/ParticipantItem";
 import {ParticipantViewModel} from "./ViewModel";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
-import {RouteProp, useRoute} from "@react-navigation/native";
-import {RootStackParamlist} from "../../../../App";
 import {AddParticipantModal} from "../../components/partipants/ModalAddParticipant";
 import {attendanceViewModel} from "../attendance/AttendanceViewModel";
-import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
+import Toast from "react-native-toast-message";
 
 
 const Participants = ({navigation}: PropsStackNavigation) => {
     const {
         participants,
-        errorMessage,
         getParticipantsList,
         deleteParticipant,
         addParticipant,
@@ -26,12 +24,12 @@ const Participants = ({navigation}: PropsStackNavigation) => {
         createAttendanceDTO,
     } = attendanceViewModel()
     const [addPressed, setAddPressed] = useState(false);
+    const [error, setError] = useState("");
 
-    useEffect(() =>{
-        if (errorMessage != ""){
-            alert(errorMessage)
-        }
-    },[errorMessage])
+    const emailSchema = yup.object().shape({
+        email: yup.string().required("Correo necesario").email("Correo inválido")
+    })
+
 
     useEffect(() => {
         getParticipantsList(slug)
@@ -46,12 +44,21 @@ const Participants = ({navigation}: PropsStackNavigation) => {
 
     const handleAdd = async (email:string) => {
         try {
+            await emailSchema.validate({email})
             console.log("Intentando añadir participante con email:", email);
             console.log("Slug del evento:", slug);
             await addParticipant(email, slug);
             getParticipantsList(slug);
         } catch (error) {
-            console.error("Error al añadir participante:", error);
+            if (error instanceof yup.ValidationError) {
+                Toast.show({
+                    type: "error",
+                    text1: error instanceof Error ? error.message : "Ocurrió un error inesperado",
+                    position: "bottom"
+                })
+            }else {
+                console.error("Error al añadir participante:", error);
+            }
         }
     };
 
@@ -65,14 +72,14 @@ const Participants = ({navigation}: PropsStackNavigation) => {
 
     return(
         <View style={stylesParticipants.container}>
-        <View style={stylesParticipants.topSection}>
-            <Pressable onPress={() => navigation.goBack()}>
-                <Image source={require("../../../../assets/back.png")} style={stylesParticipants.icon}/>
-            </Pressable>
-            <View style={stylesParticipants.containerText}>
-            <Text style={stylesParticipants.textPrincipal}>Participantes</Text>
+            <View style={stylesParticipants.topSection}>
+                <Pressable onPress={() => navigation.goBack()}>
+                    <Image source={require("../../../../assets/back.png")} style={stylesParticipants.icon}/>
+                </Pressable>
+                <View style={stylesParticipants.containerText}>
+                    <Text style={stylesParticipants.textPrincipal}>Participantes</Text>
+                </View>
             </View>
-        </View>
             <View>
                 <Filtro/>
                 <View style={stylesParticipants.participantContainer}>
@@ -83,9 +90,9 @@ const Participants = ({navigation}: PropsStackNavigation) => {
                         showsVerticalScrollIndicator={false}
                         initialNumToRender={10}
                         renderItem={({item})=>
-                        <ParticipantItem participant={item} onDelete={handleDelete} onAdd={handleAdd}></ParticipantItem>}/>
+                            <ParticipantItem participant={item} onDelete={handleDelete} onAdd={handleAdd}></ParticipantItem>}/>
 
-            </View>
+                </View>
             </View>
             <View >
                 <Pressable style={stylesParticipants.textBotonAdd} onPress={() =>{setAddPressed(!addPressed)}}>
@@ -99,7 +106,7 @@ const Participants = ({navigation}: PropsStackNavigation) => {
                         }}
                     />
                 ) : null}
-
+            <Toast/>
             </View>
         </View>
     )

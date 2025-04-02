@@ -19,6 +19,8 @@ import { DetailEventViewModel } from "./ViewModel";
 import UpdateEvent from "../update-event/UpdateEvent";
 import {createUpdateAttendanceUseCase} from "../../../domain/useCases/attendances/CreateUpdateAttendance";
 import {attendanceViewModel} from "../attendance/AttendanceViewModel";
+import * as yup from "yup";
+import Toast from "react-native-toast-message";
 
 type DetailEventRouteProp = RouteProp<RootStackParamlist, "DetailEvent">;
 
@@ -37,15 +39,28 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
         year: "numeric"
     }).format(dateObj);
 
+    const emailSchema = yup.object().shape({
+        email: yup.string().required("Correo necesario").email("Correo inválido")
+    })
+
     const handleAddParticipant = async (email: string) => {
         try {
+            await emailSchema.validate({email})
             console.log("Añadiendo participante con email:", email);
             console.log("Slug del evento actual:", event.slug);
             await addParticipant(email, event.slug);
             getParticipantsList(event.slug);
             setAddPressed(false);
         } catch (error) {
-            console.error("Error al añadir participante:", error);
+            if (error instanceof yup.ValidationError) {
+                Toast.show({
+                    type: "error",
+                    text1: error instanceof Error ? error.message : "Ocurrió un error inesperado",
+                    position: "bottom"
+                })
+            }else {
+                console.error("Error al añadir participante:", error);
+            }
         }
     };
 
@@ -92,7 +107,9 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
                     onAdd={(email) => handleAddParticipant(email)}
                 />
             )}
+            <Toast/>
         </View>
+
     );
 };
 
