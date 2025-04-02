@@ -22,11 +22,18 @@ type DetailEventRouteProp = RouteProp<RootStackParamlist, "DetailEvent">;
 
 const DetailEvent = ({ navigation }: PropsStackNavigation) => {
     const route = useRoute<DetailEventRouteProp>();
+    console.log("Datos recibidos en DetailEvent:", route.params);
     const { event } = route.params;
     const { getParticipantsList, addParticipant } = ParticipantViewModel();
     const { loading, handleDeleteEvent } = DetailEventViewModel();
     const [addPressed, setAddPressed] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
+    const dateObj = new Date(event.date);
+    const formattedDate = new Intl.DateTimeFormat("es-ES", {
+        day:  "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    }).format(dateObj);
 
     const handleAddParticipant = async (email: string) => {
         try {
@@ -47,16 +54,16 @@ const DetailEvent = ({ navigation }: PropsStackNavigation) => {
             </View>
             <View style={styles.containerDetailEvent}>
                 <View style={styles.containerTop}>
-                    <UserInfo username={"Usuario"} imageUser={require('../../../../assets/user.png')} />
+                    <UserInfo username={event?.host?.name || "Anónimo"} imageUser={require('../../../../assets/user.png')} />
                     <ActionButtons onPressBorrar={() => setModalVisible(true)} onPressEditar={() => navigation.navigate("UpdateEvent", {event})} />
                 </View>
                 <Text style={styles.textTitulo}>{event.title}</Text>
                 <View style={styles.containerTop}>
-                    <EventDate date={event.date} />
+                    <EventDate date={formattedDate} />
                     <EventLocation location={event.location} />
                 </View>
-                <Text style={styles.text}>{event.type}</Text>
                 <View style={styles.containerTop}>
+                <Text style={styles.text}>{event.type}</Text>
                     <Participants
                         imageUser1={require('../../../../assets/user.png')}
                         imageUser2={require('../../../../assets/user.png')}

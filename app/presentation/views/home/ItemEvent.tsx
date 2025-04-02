@@ -29,7 +29,7 @@ export const RenderEvent = ({item}: Props) => {
                 tipoEvento={item.type}
                 ubicacion={item.location}
                 userImage={require("../../../../assets/user.png")}
-                usuario={"Usuario"}
+                usuario={item?.host?.name || "Anónimo"}
                 onPressAsistencias={() => {
                     navigation.navigate("AsistenciaView")
                 }}

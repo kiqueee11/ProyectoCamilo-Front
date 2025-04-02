@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {EventInterface} from "../../../domain/entities/Event";
 import {getEventsByDateUseCase, getEventsByTitleUseCase} from "../../../domain/useCases/events/GetEvents";
 
-export const EventViewModel = (title:string) => {
+export const EventViewModel = () => {
     const [events, setEvents] = useState<EventInterface[]>([]);
 
     const getEventsByTitle = async (title: string) => {
@@ -19,7 +19,7 @@ export const EventViewModel = (title:string) => {
         try{
             const response = await getEventsByDateUseCase(date);
             console.log("Respuesta: ", response);
-            setEvents(response)
+            setEvents(response);
         } catch (error) {
             console.error("Error mostrando los eventos: ", error)
         }
