@@ -14,7 +14,7 @@ const Stack= createNativeStackNavigator<RootStackParamlist>();
 
 export type RootStackParamlist = {
   Home: undefined,
-  Participants: undefined,
+  Participants: {slug:string},
   DetailEvent: { event: EventInterface },
   LoginScreen: undefined,
   CreateEvent: undefined,
