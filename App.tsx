@@ -18,7 +18,7 @@ export type RootStackParamlist = {
   DetailEvent: { event: EventInterface },
   LoginScreen: undefined,
   CreateEvent: undefined,
-  AsistenciaView: undefined,
+  AsistenciaView: {event: EventInterface},
 }
 
 export default function App() {

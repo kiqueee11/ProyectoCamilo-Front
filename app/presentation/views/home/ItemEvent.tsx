@@ -31,7 +31,7 @@ export const RenderEvent = ({item}: Props) => {
                 userImage={require("../../../../assets/user.png")}
                 usuario={item?.host?.name || "Anónimo"}
                 onPressAsistencias={() => {
-                    navigation.navigate("AsistenciaView")
+                    navigation.navigate("AsistenciaView", {event: item})
                 }}
             />
         </TouchableOpacity>

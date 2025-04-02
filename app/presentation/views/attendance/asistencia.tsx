@@ -22,12 +22,15 @@ const AsistenciaView = ({navigation}: PropsStackNavigation) => {
 
     useEffect(() => {
         loadAttenders(event.slug);
+        // loadAttenders("EGW5NRthVusIuhHPX-bWsA");
+        console.log(attenders);
     }, []);
 
     const handleShowParticipant = async (id: number) => {
         try{
             console.log("Participante con id:", id);
-            console.log("Slug del evento actual:", event.slug);
+            console.log("Slug del evento actual:", "\n" +
+                "EGW5NRthVusIuhHPX-bWsA");
         } catch (e) {
             console.error( "Error al mostrar el participante: " ,e);
 
