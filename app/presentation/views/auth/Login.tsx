@@ -1,13 +1,30 @@
 import {PropsStackNavigation} from "../../interfaces/StackNav";
-import {View, Text,Image} from "react-native";
+import {View, Text, Button, Image} from "react-native";
 import styles from "./StylesLogin";
-import React from "react";
+import React, { useEffect } from "react";
 import FormInput from "../../components/FormInput";
+import {RoundedButton} from "../../components/RoundedButton";
 import {CustomButton} from "../../components/CustomButton";
+import { checkUser } from "../../../domain/useCases/auth/CheckUser";
 
 export function LoginScreen({navigation, route}: PropsStackNavigation) {
 
-
+const [email, setEmail] = React.useState("");
+const [password, setPassword] = React.useState("");
+const handleCheckUser = (email: string, password: string): void => {
+    console.log("Email:", email, "Password:", password);
+    checkUser(email, password)
+            .then((response) => {
+                if (response.length > 0) {
+                    navigation.replace("Home")
+                } else {
+                    alert("Usuario o contraseña incorrectos")
+                }
+            })
+            .catch((error) => {
+                console.error("Error al verificar el usuario:", error);
+            });    
+}
 
 return (
     <View style={styles.container}>
@@ -29,8 +46,8 @@ return (
                 keyboardType="email-address"
                 secureTextEntry={false}
                 editable={true}
-                value={null}
-                onPressFormInterface={() => {}}
+                onPressFormInterface={(text) => setEmail(text)}
+
             ></FormInput>
             <FormInput
                 image={null}
@@ -39,13 +56,12 @@ return (
                 keyboardType="default"
                 secureTextEntry={true}
                 editable={true}
-                value={null}
-                onPressFormInterface={() => {}}
+                onPressFormInterface={(text) => setPassword(text)}
+
             ></FormInput>
             <View style={styles.buttonContainer}>
                 <CustomButton onPress={() => {
-                    navigation.replace("Home")
-                    //login()
+                    handleCheckUser(email, password);
                 }} text={"Entrar"}/>
             </View>
         </View>
