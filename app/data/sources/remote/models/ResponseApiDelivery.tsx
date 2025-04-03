@@ -4,4 +4,11 @@ export interface ApiDeliveryResponse {
     status: number;
     data?: any;
     error?: any;
+
+}
+
+export interface ApiResponse {
+    success?: string;
+    error?: string;
+    message?: string;
 }

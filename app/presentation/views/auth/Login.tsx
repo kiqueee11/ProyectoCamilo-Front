@@ -47,6 +47,7 @@ return (
                 secureTextEntry={false}
                 editable={true}
                 onPressFormInterface={(text) => setEmail(text)}
+
             ></FormInput>
             <FormInput
                 image={null}
@@ -56,6 +57,7 @@ return (
                 secureTextEntry={true}
                 editable={true}
                 onPressFormInterface={(text) => setPassword(text)}
+
             ></FormInput>
             <View style={styles.buttonContainer}>
                 <CustomButton onPress={() => {

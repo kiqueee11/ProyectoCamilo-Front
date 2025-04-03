@@ -1,23 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, TouchableOpacity, View} from "react-native";
+import {FlatList, Text, TouchableOpacity, useWindowDimensions, View} from "react-native";
 import stylesHome from './StylesHome';
 import {Filtro} from "../../components/Filtro";
-import CardEvento from "../../components/CardEvento";
 import ButtonAddEvento from "../../components/ButtonAddEvento";
 import {PropsStackNavigation} from "../../interfaces/StackNav";
 import {Calendar, DateData} from "react-native-calendars";
+import CardEvento from "../../components/CardEvento";
 import {EventViewModel} from "./ViewModel";
 import {EventInterface} from "../../../domain/entities/Event";
 import {RenderEvent} from "./ItemEvent";
 
 
 const Home = ({navigation}:PropsStackNavigation) => {
-    const [selectedDate, setSelectedDate] = useState('');
-    const {events, getEventsByTitle} = EventViewModel("Prueba");
+    const today = new Date().toISOString().split('T')[0];
+    const [selectedDate, setSelectedDate] = useState(today);
+    const {events, getEventsByDate} = EventViewModel();
+    const { height } = useWindowDimensions();
+    const [lastDate, setLastDate] = useState<string | null>(null);
 
     useEffect(() => {
-        getEventsByTitle("Prueba")
-    }, []);
+        if (selectedDate !== lastDate) {
+            getEventsByDate(selectedDate);
+            setLastDate(selectedDate);
+        }
+    }, [selectedDate]);
 
     return(
         <View style={stylesHome.container}>
@@ -33,12 +39,14 @@ const Home = ({navigation}:PropsStackNavigation) => {
                     }}
                 />
             </View>
-            <View>
+            <View style={stylesHome.containerEvent}>
                 <FlatList
                     data={events}
                     renderItem={({item}: {item: EventInterface}) => <RenderEvent item={item}/>}
                     keyExtractor={(item) => item.id.toString()}
                     initialNumToRender={10} // los que se renderizan recién se abre la app
+                    windowSize={10}
+                    style={{maxHeight: height * 0.4}}
                     ListFooterComponent={<View style={{ paddingVertical: 10 }}><Text style={{ textAlign: 'center' }}>no hay más elementos</Text></View>}
                 />
             </View>

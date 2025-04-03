@@ -12,6 +12,11 @@ const stylesHome = StyleSheet.create({
     textPrincipal:{
         textAlign:'center',
         fontSize: 25
+    },
+    containerEvent:{
+        width: '100%',
+        height: '100%',
+        paddingBottom: 5
     }
 })
 
