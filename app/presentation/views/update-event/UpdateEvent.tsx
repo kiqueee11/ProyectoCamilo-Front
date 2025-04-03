@@ -23,6 +23,7 @@ const UpdateEvent = ({ navigation}: PropsStackNavigation) => {
     const [location, setLocation] = useState(event.location);
     const [type, setType] = useState(event.type);
 
+    fdate.setHours(fdate.getHours() + 2);
     const formattedDate = new Intl.DateTimeFormat('es-ES', { dateStyle: 'long' }).format(fdate);
     const formattedTime = new Intl.DateTimeFormat('es-ES', { timeStyle: 'short' }).format(fdate);
 
