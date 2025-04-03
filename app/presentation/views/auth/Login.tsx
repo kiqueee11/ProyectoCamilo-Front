@@ -11,19 +11,15 @@ export function LoginScreen({navigation, route}: PropsStackNavigation) {
 
 const [email, setEmail] = React.useState("");
 const [password, setPassword] = React.useState("");
-const handleCheckUser = (email: string, password: string): void => {
+const handleCheckUser = async (email: string, password: string): Promise<void> => {
     console.log("Email:", email, "Password:", password);
-    checkUser(email, password)
-            .then((response) => {
-                if (response.length > 0) {
-                    navigation.replace("Home")
-                } else {
-                    alert("Usuario o contraseña incorrectos")
-                }
-            })
-            .catch((error) => {
-                console.error("Error al verificar el usuario:", error);
-            });    
+    const {data, status} = await checkUser(email, password);
+           if (status === 200){
+                console.log("usuario encontrado")
+                navigation.replace("Home")
+           }else{
+                console.log("Error")
+           }
 }
 
 return (

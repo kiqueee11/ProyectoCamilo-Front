@@ -4,7 +4,12 @@ import { UserInterface } from "../../entities/User";
 
 const {checkUsers} = new UserRepositoryImpl();
 
-export const checkUser = async (email: string, password: string): Promise<UserInterface[]> => {
+export const checkUser = async (
+    email: string,
+    password: string
+): Promise<{ data: UserInterface[]; status: number }> => {
     console.log("CheckUserUseCase: ", email, password);
-    return await checkUsers(email, password);
-}
+    
+    const result = await checkUsers(email, password);
+    return result;
+};
