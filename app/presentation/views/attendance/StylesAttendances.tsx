@@ -2,63 +2,75 @@ import {StyleSheet} from "react-native";
 
 
 const stylesAsistencia = StyleSheet.create({
+
     container: {
         flex: 1,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: 20,
     },
+
     titulo: {
         fontSize: 40,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: 'black',
+        color: '#333',
         marginBottom: 20,
     },
+
     text: {
         fontSize: 25,
-        color: 'black',
+        color: '#333',
         fontWeight: 'bold',
+        lineHeight: 30,
     },
+
     textDetails: {
-        fontSize: 14,
-        color: 'black',
+        marginBottom: 8,
+        fontSize: 15,
+        color: '#555',
         fontWeight: '300',
     },
+
     textEvent: {
-        marginTop: 20,
-        fontSize: 17,
+        fontSize: 14,
         color: 'black',
-        fontWeight: '400',
+        fontWeight: 500,
     },
+
     formContainer: {
         width: '90%',
-        backgroundColor: 'white',
+        backgroundColor: '#F9F9F9',
         padding: 20,
         borderRadius: 15,
         shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-        elevation: 5,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.15,
+        shadowRadius: 5,
+        elevation: 6,
+        marginHorizontal: 10,
     },
+
     listItems: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        borderBottomWidth: 0.5,
         alignItems: 'center',
-        paddingVertical: 5,
-        borderBottomColor: 'black',
+        paddingVertical: 8,
+        borderBottomColor: '#ccc',
     },
+
     listText: {
         fontSize: 16,
-        color: 'black',
+        color: '#444',
         fontStyle: 'italic'
     },
 
     contentContainer: {
-        paddingTop: 20,
-        paddingBottom: 87,
+        paddingTop: 12,
+        paddingBottom: 20,
     }
+
 });
 
 export default stylesAsistencia;
